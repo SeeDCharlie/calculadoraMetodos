@@ -6,6 +6,8 @@
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'calculadora/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'calculadora/css/sumaResta/styles.css' %}">
+    
     <title>Suma y Resta de Matrices</title>
 </head>
 <body>
@@ -16,13 +18,99 @@
                 <p class="display-2" style="text-align: center;">Suma resta</p>
             </div>
             <div class="col-12">
-                <p class="display-4">Instrucciones:</p>
+                <p class=""><strong>Instrucciones: </strong><br>
+                * Digite el numero de filas y de columnas de las dos matrices <br>
+                * Digite los Valores de las Dos Matrices <br>
+                * proceda a sumar orestar las dos matrices <br></p>
+                <br>
+            
             </div>
+            
         </div>
-       
+        <hr>
+       <div class="row">
+            <div class="col-12">
+                <h3>Matriz Numero Uno</h3>
+            </div>
+            <div class="col-3" style="">
+                <h4>No. de Filas</h4>
+            </div>
+            <div class="col-3" style="">
+                <h4>No. de Columnas</h4>
+            </div>
+       </div>
+        <div class="row">
+            <div class="col-3">
+                <input type="number" id="rowsUno" >
+            </div>
+            <div class="col-3">
+                <div class="col-3">
+                    <input type="number" id="colsUno" >
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-success" id="btnOkUno">OK</button>
+            </div>
+
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12">
+                <h3>Matriz Numero Dos</h3>
+            </div>
+            <div class="col-3" style="">
+                <h4>No. de Filas</h4>
+            </div>
+            <div class="col-3" style="">
+                <h4>No. de Columnas</h4>
+            </div>
+       </div>
         <div class="row">
             
+            <div class="col-3">
+                <div class="col-3">
+                    <input type="number" id="rowsDos" >
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-3">
+                    <input type="number" id="colsDos" >
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-success" id="btnOkDos">OK</button>
+            </div>
+            
 
+        </div>
+        <hr>
+        <div  class="row">
+            <div class="col-5">
+                <h2>Matriz Uno</h2>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-danger" id="btnDeleteOne">Borrar</button>
+            </div>
+            <div class="col-12">
+                <table class="col-12" id="matrizUno"  style = 'width: 20px;'>
+
+                </table>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            
+            <div class="col-5">
+                <h2>Matriz Dos</h2>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-danger" id="btnDeleteTwo">Borrar</button>
+            </div>
+            <div class="col-12">
+                <table id="matrizDos">
+
+                </table>
+            </div>
         </div>
 
 
