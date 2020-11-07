@@ -1,0 +1,24 @@
+{% extends 'calculadora/index.html' %}
+
+
+{% block content %}
+ <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#home"> Montecarlo</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu2">Inversa Transpuesta GaussJordan</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane container active" id="home">
+      {% include 'calculadora/monteCarlo.html' %}
+  </div>
+  <div class="tab-pane container fade" id="menu1">...</div>
+  <div class="tab-pane container fade" id="menu2">...</div>
+</div>
+
+{% endblock %}
