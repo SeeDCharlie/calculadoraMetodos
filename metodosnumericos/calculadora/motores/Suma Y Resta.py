@@ -1,10 +1,6 @@
 print("Suma y resta de matrices")
 
-def restaMatriz():
-        # se solicita al usuario el numero de columnas de las matrices
-        col = int(input("Número de filas:"))
-        # se solicita al usuario el numero de filas de las matrices
-        row = int(input("Número de columnas:"))
+def restaMatriz(col, row):
         # Se declara la primer matriz con el num de filas y columnas dados por el usuario
         matriz1 = [[0 for x in range(row)] for y in range(col)]
         print("\nPRIMER MATRIZ")
