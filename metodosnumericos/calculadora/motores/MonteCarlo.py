@@ -1,6 +1,7 @@
 import sympy as sp
 import numpy as np
 from random import *
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 def evalAtPointNP(f, x):
         b = sp.sympify(f).free_symbols
