@@ -113,9 +113,10 @@
             </div>
         </div>
         <hr>
+        {% csrf_token %}
         <div class="row">
             <div class="col-3">
-                <button class="btn btn-info" id="btnSum">Sumar</button>
+                <button class="btn btn-info" id="btnSum" url="{% url 'calcSumRest' %}">Sumar</button>
 
             </div>
             <div class="col-3">
@@ -135,7 +136,7 @@
     
     <br><br>
 
-    <script src="{% static 'calculadora/js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'calculadora/js/jquery-3.5.1.js' %}"></script>
     <script src="{% static 'calculadora/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'calculadora/js/popper.min.js' %}"></script>
     <script src="{% static 'calculadora/js/sumaResta/controles.js' %}"></script>
