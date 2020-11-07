@@ -7,10 +7,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
 from random import sample
 from io import StringIO
-=======
 from calculadora.motores import SumaResta
->>>>>>> 449fb59fac1e4eba580ca87159c245d3ea8cdf5b
-# Create your views here.
 
 
 def index(request):
@@ -35,7 +32,6 @@ def monteCarlo(request):
     imsrc = base64.b64encode(buf.read())
     imuri = 'data:image/png;base64,{}'.format(urllib.parse.quote(imsrc))
     return render(request, 'calculadora/monteCarlo.html', {'graphic':imuri})
-
 
 def grafica(request):
     x = range(-10,10)
@@ -66,15 +62,5 @@ def grafica(request):
     # Añadimos la cabecera de longitud de fichero para más estabilidad
     response['Content-Length'] = str(len(response.content))
 
-<<<<<<< HEAD
     # Devolvemos la response
     return response
-=======
-    return render(request,'calculadora/index.html')
-
-def suma_resta(request):
-
-    
-
-    return render(request, 'calculadora/Suma_Resta.html')
->>>>>>> 449fb59fac1e4eba580ca87159c245d3ea8cdf5b
