@@ -13,6 +13,12 @@ function createMatrix(rows, cols, id_mariz) {
     $('#'+id_mariz).append(content);
 }
 
+function getRowsCols(){
+    var dat = [[parseInt($('#rowsUno').val(), 10),parseInt($('#colsUno').val(),10)],
+                [parseInt($('#rowsDos').val(),10),parseInt($('#colsDos').val(),10)]];
+    return dat;
+}
+
 
 $( "#btnOkUno" ).on( "click", function() {
     var rows = $('#rowsUno').val();
@@ -42,5 +48,27 @@ $( "#btnDeleteOne" ).on( "click", function() {
 });
 $( "#btnDeleteTwo" ).on( "click", function() {
     $('#matrizDos').empty();    
+});
+
+
+$( "#btnSum" ).on( "click", function() {
+    var rowsCols = getRowsCols();
+
+    if(rowsCols[0].includes(NaN) || rowsCols[1].includes(NaN) ){
+        alert("NO se han creado las matrices correctamente");
+    }else{
+        if(rowsCols[0][0] == rowsCols[1][0] && rowsCols[0][1] == rowsCols[1][1]){
+            alert("alv"+rowsCols);
+            
+        }else{
+            alert("las filas y columnas de las matrices deben ser iguales!!"); 
+        }
+    }
+
+    
+
+});
+$( "#btnRest" ).on( "click", function() {
+       
 });
 
