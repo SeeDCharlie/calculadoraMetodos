@@ -1,4 +1,5 @@
 from django.shortcuts import render
+<<<<<<< HEAD
 import matplotlib.pyplot as plt
 import io
 import urllib, base64
@@ -6,6 +7,9 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
 from random import sample
 from io import StringIO
+=======
+from calculadora.motores import SumaResta
+>>>>>>> 449fb59fac1e4eba580ca87159c245d3ea8cdf5b
 # Create your views here.
 
 
@@ -62,5 +66,15 @@ def grafica(request):
     # Añadimos la cabecera de longitud de fichero para más estabilidad
     response['Content-Length'] = str(len(response.content))
 
+<<<<<<< HEAD
     # Devolvemos la response
     return response
+=======
+    return render(request,'calculadora/index.html')
+
+def suma_resta(request):
+
+    
+
+    return render(request, 'calculadora/Suma_Resta.html')
+>>>>>>> 449fb59fac1e4eba580ca87159c245d3ea8cdf5b
