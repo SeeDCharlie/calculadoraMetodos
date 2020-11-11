@@ -1,5 +1,4 @@
 from django.shortcuts import render
-<<<<<<< HEAD
 import matplotlib.pyplot as plt
 import io
 import urllib, base64
@@ -8,21 +7,18 @@ from django.http import HttpResponse
 from random import sample
 from io import StringIO
 from calculadora.motores import SumaResta
-<<<<<<< HEAD
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
 
 # Create your views here.
-=======
->>>>>>> 2f58eb675e00601073510361d0c9d645d1b7c7e3
 
 
 def index(request):
     return render(request,'calculadora/index.html')
 
-<<<<<<< HEAD
+
 def suma_resta(request):
     return render(request, 'calculadora/Suma_Resta.html')
 @csrf_exempt 
@@ -35,7 +31,7 @@ def calcSumRest(request):
         return JsonResponse({'m':mDos, 'success':True})
     
     return JsonResponse({'success':False})
-=======
+
 def primerCorte(request):
     return render(request, 'calculadora/cortes/corte1.html')
 
@@ -87,4 +83,3 @@ def grafica(request):
 
     # Devolvemos la response
     return response
->>>>>>> 2f58eb675e00601073510361d0c9d645d1b7c7e3
