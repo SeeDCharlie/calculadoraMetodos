@@ -5,6 +5,9 @@ import urllib, base64
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
 from random import sample
+<<<<<<< HEAD
+
+=======
 from io import StringIO
 from calculadora.motores import SumaResta
 from django.http import JsonResponse
@@ -13,6 +16,12 @@ import json
 
 
 # Create your views here.
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 2f58eb675e00601073510361d0c9d645d1b7c7e3
+>>>>>>> 712101bfa61377331de83ef3eeba5a591aa707cb
+>>>>>>> d4b8b3a8f75685fc87a1cb3a61f6c06bc06bd7bb
 
 
 def index(request):
@@ -41,16 +50,18 @@ def segundoCorte(request):
 def tercerCorte(request):
     return render(request, 'calculadora/cortes/corte3.html')
 
-
+def trapecios(request):
+    return render(request,'')
 
 def monteCarlo(request):
-    figure = plt.gcf()
-    buf = io.BytesIO()
-    figure.savefig(buf, format='png', transparent=True, quality=100, dpi=200)
-    buf.seek(0)
-    imsrc = base64.b64encode(buf.read())
-    imuri = 'data:image/png;base64,{}'.format(urllib.parse.quote(imsrc))
-    return render(request, 'calculadora/monteCarlo.html', {'graphic':imuri})
+    if request.GET.get('generar'):
+        print("genero grafica")
+    elif request.GET.get('generar'):
+        print("calcular")
+        
+    return render(request, 'calculadora/monteCarlo.html')
+
+
 
 def grafica(request):
     x = range(-10,10)
@@ -83,3 +94,13 @@ def grafica(request):
 
     # Devolvemos la response
     return response
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+def suma_resta(request):
+    return render(request,'calculadora/Suma_Resta.html')
+=======
+>>>>>>> 2f58eb675e00601073510361d0c9d645d1b7c7e3
+>>>>>>> 712101bfa61377331de83ef3eeba5a591aa707cb
+>>>>>>> d4b8b3a8f75685fc87a1cb3a61f6c06bc06bd7bb
