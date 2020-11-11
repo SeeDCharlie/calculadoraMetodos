@@ -1,13 +1,11 @@
 from django.shortcuts import render
-<<<<<<< HEAD
 import matplotlib.pyplot as plt
 import io
 import urllib, base64
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
 from random import sample
-from io import StringIO
-from calculadora.motores import SumaResta
+
 
 
 def index(request):
@@ -22,16 +20,18 @@ def segundoCorte(request):
 def tercerCorte(request):
     return render(request, 'calculadora/cortes/corte3.html')
 
-
+def trapecios(request):
+    return render(request,'')
 
 def monteCarlo(request):
-    figure = plt.gcf()
-    buf = io.BytesIO()
-    figure.savefig(buf, format='png', transparent=True, quality=100, dpi=200)
-    buf.seek(0)
-    imsrc = base64.b64encode(buf.read())
-    imuri = 'data:image/png;base64,{}'.format(urllib.parse.quote(imsrc))
-    return render(request, 'calculadora/monteCarlo.html', {'graphic':imuri})
+    if request.GET.get('generar'):
+        print("genero grafica")
+    elif request.GET.get('generar'):
+        print("calcular")
+        
+    return render(request, 'calculadora/monteCarlo.html')
+
+
 
 def grafica(request):
     x = range(-10,10)
@@ -64,3 +64,6 @@ def grafica(request):
 
     # Devolvemos la response
     return response
+
+def suma_resta(request):
+    return render(request,'calculadora/Suma_Resta.html')

@@ -27,7 +27,7 @@ def montecarlo(a, b, k, n, f):
 
         return (ne / n) * (b - a) * k
 
-                
+
 x, y = sp.symbols('x y')
 str_ecuacion = input("ingrese la ecuación:")
 funcion = sp.sympify(str_ecuacion)

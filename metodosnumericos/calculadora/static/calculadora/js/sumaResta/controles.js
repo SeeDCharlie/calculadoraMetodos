@@ -8,7 +8,7 @@ function createMatrix(rows, cols, id_mariz) {
         }
         content += "</tr>";
     }
-    
+
 
     $('#'+id_mariz).append(content);
 }
@@ -89,9 +89,8 @@ $( "#btnRest" ).on( "click", function() {
     }else{
         if(rowsCols[0][0] == rowsCols[1][0] && rowsCols[0][1] == rowsCols[1][1]){
             alert("alv"+rowsCols);
-            
         }else{
-            alert("las filas y columnas de las matrices deben ser iguales!!"); 
+            alert("las filas y columnas de las matrices deben ser iguales!!");
         }
     }
 });
