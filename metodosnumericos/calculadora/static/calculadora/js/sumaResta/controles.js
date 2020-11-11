@@ -59,12 +59,40 @@ $( "#btnSum" ).on( "click", function() {
     }else{
         if(rowsCols[0][0] == rowsCols[1][0] && rowsCols[0][1] == rowsCols[1][1]){
             alert("alv : "+getMatrix('matrizUno'));
+            calcSum();
             
         }else{
             alert("las filas y columnas de las matrices deben ser iguales!!"); 
         }
     }
 });
+
+function calcSum(){
+    $.ajax({
+        url: $('#btnSum').attr('url'),
+        data: {
+            dats: JSON.stringify({
+                mUno: getMatrix('matrizUno'),
+                mDos: getMatrix('matrizDos')  
+            }),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            if (data.success) {
+               alert("resultado : " + data.m);     
+            }
+            else {
+                alert('error');
+            }
+        },
+        error: function () {
+            alert("no paso nada con el ajax!!");
+        }
+    });
+}
 
 function getMatrix(nametable){
     var dats = [];
