@@ -5,9 +5,7 @@ import urllib, base64
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
 from random import sample
-<<<<<<< HEAD
 
-=======
 from io import StringIO
 from calculadora.motores import SumaResta
 from django.http import JsonResponse
@@ -16,13 +14,6 @@ import json
 
 
 # Create your views here.
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 2f58eb675e00601073510361d0c9d645d1b7c7e3
->>>>>>> 712101bfa61377331de83ef3eeba5a591aa707cb
->>>>>>> d4b8b3a8f75685fc87a1cb3a61f6c06bc06bd7bb
-
 
 def index(request):
     return render(request,'calculadora/index.html')
@@ -94,13 +85,6 @@ def grafica(request):
 
     # Devolvemos la response
     return response
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 
 def suma_resta(request):
     return render(request,'calculadora/Suma_Resta.html')
-=======
->>>>>>> 2f58eb675e00601073510361d0c9d645d1b7c7e3
->>>>>>> 712101bfa61377331de83ef3eeba5a591aa707cb
->>>>>>> d4b8b3a8f75685fc87a1cb3a61f6c06bc06bd7bb
