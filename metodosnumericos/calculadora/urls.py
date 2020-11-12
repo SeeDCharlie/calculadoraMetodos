@@ -1,9 +1,5 @@
 from django.urls import path
-
-from .views import index, suma_resta, calcSumRest
-
-from .views import index, suma_resta, calcSumRest
-
+from .views import index, suma_resta, calcSumaMatriz
 from .views import *
 
 urlpatterns = [
@@ -16,9 +12,8 @@ urlpatterns = [
     path('segundoCorte/', segundoCorte, name="segundoCorte"),
     path('tercerCorte/', tercerCorte, name="tercerCorte"),
 
+    #url para el calculo de la suma y resta de matrices
     path('suma_resta/', suma_resta, name = 'suma_resta'),
-
-    path('suma_resta/', suma_resta, name = 'suma_resta'),
-
-    path('calcSumRest/', calcSumRest, name ='calcSumRest'),
+    path('restaM/', calcRestaMatriz, name = 'calcRestaMatriz'),
+    path('calcSumaMatriz/', calcSumaMatriz, name ='calcSumaMatriz'),
 ]

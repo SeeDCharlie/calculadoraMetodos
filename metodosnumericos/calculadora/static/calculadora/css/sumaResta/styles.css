@@ -1,8 +1,9 @@
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type="number"] {
-    -moz-appearance: textfield;
+
+
+
+#matrixResult, th, td{
+    padding: 15px;
+    margin: 15px;
+    border: 1px solid black;
+    border-collapse: collapse;
 }

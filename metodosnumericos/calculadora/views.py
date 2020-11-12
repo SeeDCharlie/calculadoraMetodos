@@ -5,7 +5,6 @@ import urllib, base64
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
 from random import sample
-
 from io import StringIO
 from calculadora.motores import SumaResta
 from django.http import JsonResponse
@@ -21,15 +20,23 @@ def index(request):
 
 def suma_resta(request):
     return render(request, 'calculadora/Suma_Resta.html')
-@csrf_exempt 
-def calcSumRest(request):
-    if request.is_ajax() and request.method == 'POST':
-        #print("respuesta : ", dict(request.POST.get('dats'))['mUno'])
-        mDos = json.loads(request.POST.get('dats'))['mUno']
-        #mDos = json.loads(request.POST.get('dats')[1])
-
-        return JsonResponse({'m':mDos, 'success':True})
     
+@csrf_exempt 
+def calcSumaMatriz(request):
+    if request.is_ajax() and request.method == 'POST':
+        mDos = json.loads(request.POST.get('dats'))['mUno']
+        mUno = json.loads(request.POST.get('dats'))['mDos']
+        matrizResultado = SumaResta.suma(mUno,mDos).tolist()
+        return JsonResponse({'matrResult':matrizResultado, 'success':True})
+    return JsonResponse({'success':False})
+
+@csrf_exempt
+def calcRestaMatriz(request):
+    if request.is_ajax() and request.method == 'POST':
+        mDos = json.loads(request.POST.get('dats'))['mDos']
+        mUno = json.loads(request.POST.get('dats'))['mUno']
+        matrizResultado = SumaResta.resta(mUno,mDos).tolist()
+        return JsonResponse({'matrResult':matrizResultado, 'success':True})
     return JsonResponse({'success':False})
 
 def primerCorte(request):
@@ -86,5 +93,3 @@ def grafica(request):
     # Devolvemos la response
     return response
 
-def suma_resta(request):
-    return render(request,'calculadora/Suma_Resta.html')

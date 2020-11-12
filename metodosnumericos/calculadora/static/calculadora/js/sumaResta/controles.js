@@ -58,7 +58,7 @@ $( "#btnSum" ).on( "click", function() {
         alert("NO se han creado las matrices ");
     }else{
         if(rowsCols[0][0] == rowsCols[1][0] && rowsCols[0][1] == rowsCols[1][1]){
-            alert("alv : "+getMatrix('matrizUno'));
+
             calcSum();
             
         }else{
@@ -66,7 +66,21 @@ $( "#btnSum" ).on( "click", function() {
         }
     }
 });
+//--------------------------------------------------------------------------------------------------------
+$( "#btnRest" ).on( "click", function() {
+    var rowsCols = getRowsCols();
 
+    if(rowsCols[0].includes(NaN) || rowsCols[1].includes(NaN) ){
+        alert("NO se han creado las matrices ");
+    }else{
+        if(rowsCols[0][0] == rowsCols[1][0] && rowsCols[0][1] == rowsCols[1][1]){
+            calcRest();
+        }else{
+            alert("las filas y columnas de las matrices deben ser iguales!!");
+        }
+    }
+});
+//------------------------------------------------------------------------
 function calcSum(){
     $.ajax({
         url: $('#btnSum').attr('url'),
@@ -82,7 +96,7 @@ function calcSum(){
         dataType: 'json',
         success: function (data) {
             if (data.success) {
-               alert("resultado : " + data.m);     
+               showResult(data.matrResult);     
             }
             else {
                 alert('error');
@@ -93,14 +107,40 @@ function calcSum(){
         }
     });
 }
-
+//------------------------------------------------------------------------
+function calcRest(){
+    $.ajax({
+        url: $('#btnRest').attr('url'),
+        data: {
+            dats: JSON.stringify({
+                mUno: getMatrix('matrizUno'),
+                mDos: getMatrix('matrizDos')  
+            }),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            if (data.success) {
+               showResult(data.matrResult);     
+            }
+            else {
+                alert('error');
+            }
+        },
+        error: function () {
+            alert("no paso nada con el ajax!!");
+        }
+    });
+}
 function getMatrix(nametable){
     var dats = [];
     $('#'+nametable+' tr').each(function (index){
         var row = [];
 
         $($(this).find('td')).each(function (){
-            row.push($(this).find('input').val());
+            row.push(parseFloat($(this).find('input').val()));
         });
         dats.push(row);
 
@@ -108,18 +148,23 @@ function getMatrix(nametable){
     return dats;
 }
 
-//--------------------------------------------------------------------------------------------------------
-$( "#btnRest" ).on( "click", function() {
-    var rowsCols = getRowsCols();
 
-    if(rowsCols[0].includes(NaN) || rowsCols[1].includes(NaN) ){
-        alert("NO se han creado las matrices ");
-    }else{
-        if(rowsCols[0][0] == rowsCols[1][0] && rowsCols[0][1] == rowsCols[1][1]){
-            alert("alv"+rowsCols);
-        }else{
-            alert("las filas y columnas de las matrices deben ser iguales!!");
-        }
-    }
-});
+//---------------------------------------------------------------------
 
+function showResult(matrixResult){
+    $('#matrixResult').empty();
+    var content = ""
+    $.each(matrixResult, function(i , row){
+    
+        content += "<tr>";
+        $.each(row, function(j, dat){
+            content += "<td>" + dat +"</td> ";
+ 
+        });
+        content += "</tr>";
+    });
+        
+    $('#matrixResult').append(content);
+}
+
+//---------------------------------------------------------------------
