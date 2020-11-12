@@ -15,7 +15,7 @@
 
         <div class="row">
             <div class="col-12">
-                <p class="display-2" style="text-align: center;">Suma resta</p>
+                <p class="display-2" style="text-align: center;">Suma y Resta de Matrices</p>
             </div>
             <div class="col-12">
                 <p class=""><strong>Instrucciones: </strong><br>
@@ -116,16 +116,16 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-3">
-                <button class="btn btn-info" id="btnSum" url="{% url 'calcSumRest' %}">Sumar</button>
+                <button class="btn btn-info" id="btnSum" url="{% url 'calcSumaMatriz' %}">Sumar</button>
 
             </div>
             <div class="col-3">
-                <button class="btn btn-info" id="btnRest">Restar</button>
+                <button class="btn btn-info" id="btnRest" url = "{% url 'calcRestaMatriz' %}">Restar</button>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <table id="matrixResult">
+                <table id="matrixResult" >
 
                 </table>
             </div>
