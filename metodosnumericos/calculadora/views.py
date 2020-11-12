@@ -5,30 +5,25 @@ import urllib, base64
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
 from random import sample
-<<<<<<< HEAD
 
-=======
+
 from io import StringIO
 from calculadora.motores import SumaResta
-<<<<<<< HEAD
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
 
 # Create your views here.
-=======
->>>>>>> 2f58eb675e00601073510361d0c9d645d1b7c7e3
->>>>>>> 712101bfa61377331de83ef3eeba5a591aa707cb
 
 
 def index(request):
     return render(request,'calculadora/index.html')
 
-<<<<<<< HEAD
 def suma_resta(request):
     return render(request, 'calculadora/Suma_Resta.html')
-@csrf_exempt 
+
+@csrf_exempt
 def calcSumRest(request):
     if request.is_ajax() and request.method == 'POST':
         #print("respuesta : ", dict(request.POST.get('dats'))['mUno'])
@@ -36,9 +31,9 @@ def calcSumRest(request):
         #mDos = json.loads(request.POST.get('dats')[1])
 
         return JsonResponse({'m':mDos, 'success':True})
-    
+
     return JsonResponse({'success':False})
-=======
+
 def primerCorte(request):
     return render(request, 'calculadora/cortes/corte1.html')
 
@@ -56,7 +51,6 @@ def monteCarlo(request):
         print("genero grafica")
     elif request.GET.get('generar'):
         print("calcular")
-        
     return render(request, 'calculadora/monteCarlo.html')
 
 
@@ -92,10 +86,6 @@ def grafica(request):
 
     # Devolvemos la response
     return response
-<<<<<<< HEAD
 
 def suma_resta(request):
     return render(request,'calculadora/Suma_Resta.html')
-=======
->>>>>>> 2f58eb675e00601073510361d0c9d645d1b7c7e3
->>>>>>> 712101bfa61377331de83ef3eeba5a591aa707cb
