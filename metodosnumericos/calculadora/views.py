@@ -5,7 +5,6 @@ import urllib, base64
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
 from random import sample
-
 from io import StringIO
 from calculadora.motores import SumaResta
 from django.http import JsonResponse
@@ -19,10 +18,6 @@ def index(request):
     return render(request,'calculadora/index.html')
 
 
-def suma_resta(request):
-    return render(request, 'calculadora/Suma_Resta.html')
-
-    
 @csrf_exempt 
 def calcSumaMatriz(request):
 
