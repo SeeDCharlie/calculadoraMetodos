@@ -5,11 +5,7 @@ import urllib, base64
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
 from random import sample
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 62d38cb2cfdab2fc11c82fa7e47c50aa1e974fc3
 from io import StringIO
 from calculadora.motores import SumaResta
 from django.http import JsonResponse
@@ -18,39 +14,27 @@ import json
 
 
 # Create your views here.
-<<<<<<< HEAD
-
-=======
->>>>>>> 62d38cb2cfdab2fc11c82fa7e47c50aa1e974fc3
 
 def index(request):
     return render(request,'calculadora/index.html')
 
-<<<<<<< HEAD
-def suma_resta(request):
-    return render(request, 'calculadora/Suma_Resta.html')
-
-@csrf_exempt
-def calcSumRest(request):
-=======
 
 def suma_resta(request):
     return render(request, 'calculadora/Suma_Resta.html')
+
     
 @csrf_exempt 
 def calcSumaMatriz(request):
->>>>>>> 62d38cb2cfdab2fc11c82fa7e47c50aa1e974fc3
+
     if request.is_ajax() and request.method == 'POST':
         mDos = json.loads(request.POST.get('dats'))['mUno']
         mUno = json.loads(request.POST.get('dats'))['mDos']
         matrizResultado = SumaResta.suma(mUno,mDos).tolist()
         return JsonResponse({'matrResult':matrizResultado, 'success':True})
+        
     return JsonResponse({'success':False})
 
-<<<<<<< HEAD
-        return JsonResponse({'m':mDos, 'success':True})
 
-=======
 @csrf_exempt
 def calcRestaMatriz(request):
     if request.is_ajax() and request.method == 'POST':
@@ -58,7 +42,7 @@ def calcRestaMatriz(request):
         mUno = json.loads(request.POST.get('dats'))['mUno']
         matrizResultado = SumaResta.resta(mUno,mDos).tolist()
         return JsonResponse({'matrResult':matrizResultado, 'success':True})
->>>>>>> 62d38cb2cfdab2fc11c82fa7e47c50aa1e974fc3
+
     return JsonResponse({'success':False})
 
 def primerCorte(request):
@@ -113,9 +97,3 @@ def grafica(request):
 
     # Devolvemos la response
     return response
-
-<<<<<<< HEAD
-def suma_resta(request):
-    return render(request,'calculadora/Suma_Resta.html')
-=======
->>>>>>> 62d38cb2cfdab2fc11c82fa7e47c50aa1e974fc3
