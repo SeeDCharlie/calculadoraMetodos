@@ -11,6 +11,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from calculadora.motores import motorMAtrix
+import random
+import string
 
 # Create your views here.
 
@@ -64,15 +66,16 @@ def calcMaTrans(request):
         return JsonResponse({'matrResult':matrizResultado, 'success':True})
     return JsonResponse({'success':False})
 @csrf_exempt
-#metodo de gauus jordan a una matriz
+#metodo de gauss jordan a una matriz
 def calcMaGauss(request):
     if request.is_ajax() and request.method == 'POST':
         mUno = json.loads(request.POST.get('dats'))['mUno']
         res = [num[-1] for num in mUno]
-        print("res : ", res)
         mUno = [num[:-1] for num in mUno]
         matrizResultado = motorMAtrix.gaussJordan(mUno, res).tolist()
-        print("result : ", matrizResultado)
+        letters = string.ascii_lowercase
+        rand_letters = random.choices(letters,k=len(matrizResultado))
+        matrizResultado = [(rand_letters[i] +" = "+ str(dat)) for i, dat in enumerate(matrizResultado)]
         return JsonResponse({'matrResult':[matrizResultado], 'success':True})
     return JsonResponse({'success':False})
 
