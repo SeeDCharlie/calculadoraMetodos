@@ -10,25 +10,21 @@ from calculadora.motores import SumaResta
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from calculadora.motores import motorMAtrix
 
 # Create your views here.
 
 def index(request):
     return render(request,'calculadora/index.html')
 
-
 @csrf_exempt 
 def calcSumaMatriz(request):
-
     if request.is_ajax() and request.method == 'POST':
         mDos = json.loads(request.POST.get('dats'))['mUno']
         mUno = json.loads(request.POST.get('dats'))['mDos']
         matrizResultado = SumaResta.suma(mUno,mDos).tolist()
-        return JsonResponse({'matrResult':matrizResultado, 'success':True})
-        
+        return JsonResponse({'matrResult':matrizResultado, 'success':True})      
     return JsonResponse({'success':False})
-
 
 @csrf_exempt
 def calcRestaMatriz(request):
@@ -37,7 +33,47 @@ def calcRestaMatriz(request):
         mUno = json.loads(request.POST.get('dats'))['mUno']
         matrizResultado = SumaResta.resta(mUno,mDos).tolist()
         return JsonResponse({'matrResult':matrizResultado, 'success':True})
+    return JsonResponse({'success':False})
 
+#multiplicacion de matrices
+
+@csrf_exempt
+def calcMultMatriz(request):
+    if request.is_ajax() and request.method == 'POST':
+        mUno = json.loads(request.POST.get('dats'))['mUno']
+        mDos = json.loads(request.POST.get('dats'))['mDos']
+        matrizResultado = motorMAtrix.multiMatrix(mUno,mDos).tolist()
+        return JsonResponse({'matrResult':matrizResultado, 'success':True})
+    return JsonResponse({'success':False})
+
+#inversa de una matriz
+@csrf_exempt
+def calcMaInver(request):
+    if request.is_ajax() and request.method == 'POST':
+        mUno = json.loads(request.POST.get('dats'))['mUno']
+        matrizResultado = motorMAtrix.matrizInver(mUno).tolist()
+        
+        return JsonResponse({'matrResult':matrizResultado, 'success':True})
+    return JsonResponse({'success':False})
+@csrf_exempt
+#transpuesta de una matriz
+def calcMaTrans(request):
+    if request.is_ajax() and request.method == 'POST':
+        mUno = json.loads(request.POST.get('dats'))['mUno']
+        matrizResultado = motorMAtrix.matrixTran(mUno).tolist()
+        return JsonResponse({'matrResult':matrizResultado, 'success':True})
+    return JsonResponse({'success':False})
+@csrf_exempt
+#metodo de gauus jordan a una matriz
+def calcMaGauss(request):
+    if request.is_ajax() and request.method == 'POST':
+        mUno = json.loads(request.POST.get('dats'))['mUno']
+        res = [num[-1] for num in mUno]
+        print("res : ", res)
+        mUno = [num[:-1] for num in mUno]
+        matrizResultado = motorMAtrix.gaussJordan(mUno, res).tolist()
+        print("result : ", matrizResultado)
+        return JsonResponse({'matrResult':[matrizResultado], 'success':True})
     return JsonResponse({'success':False})
 
 def primerCorte(request):

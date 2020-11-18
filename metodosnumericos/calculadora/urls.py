@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import *
 
-from .views import index, calcSumaMatriz
+from .views import *
 from .views import *
 
 
@@ -19,6 +19,16 @@ urlpatterns = [
     path('restaM/', calcRestaMatriz, name = 'calcRestaMatriz'),
     path('calcSumaMatriz/', calcSumaMatriz, name ='calcSumaMatriz'),
 
-    #url
+    #url para el calculo de la multiplicacion de matrices
+    path('calcMultiMatriz/', calcMultMatriz, name='calcMultiMatrix'),
+
+    #inversa de una matriz
+    path('calcMaInv', calcMaInver, name = 'calcMaInv'),
+
+    #transuesta de una matriz
+    path('calcMaTans', calcMaTrans, name = 'calcMaTrans'),
+
+    #gauss Jordan en una matriz
+    path('calcMaGauss', calcMaGauss, name = 'calcMaGauss'),
 
 ]
