@@ -8,7 +8,7 @@ from .views import *
 urlpatterns = [
     path('', index),
     path('home/', index,name="home"),
-    path('grafica/(?P<funcion>[^/]+)/(?P<a>[0-9]+)/(?P<b>[0-9]+)', grafica, name="grafica"),
+    path('grafica/<str:funcion>/<str:a>/<str:b>', grafica, name="grafica"),
     path('montecarlo/', monteCarlo,name="montecarlo"),
 
     path('primerCorte/', primerCorte, name="primerCorte"),
