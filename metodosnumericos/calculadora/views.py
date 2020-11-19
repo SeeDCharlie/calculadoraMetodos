@@ -7,12 +7,17 @@ from django.http import HttpResponse
 from random import sample
 from io import StringIO
 from calculadora.motores import SumaResta
+from calculadora.motores import Simpson13
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from calculadora.motores import motorMAtrix
 import random
 import string
+import sympy as sp
+from sympy import *
+import numpy as np
+from sympy.parsing.sympy_parser import parse_expr
 
 # Create your views here.
 
@@ -54,7 +59,6 @@ def calcMaInver(request):
     if request.is_ajax() and request.method == 'POST':
         mUno = json.loads(request.POST.get('dats'))['mUno']
         matrizResultado = motorMAtrix.matrizInver(mUno).tolist()
-        
         return JsonResponse({'matrResult':matrizResultado, 'success':True})
     return JsonResponse({'success':False})
 @csrf_exempt
@@ -79,6 +83,18 @@ def calcMaGauss(request):
         return JsonResponse({'matrResult':[matrizResultado], 'success':True})
     return JsonResponse({'success':False})
 
+@csrf_exempt
+def calcSimp13(request):
+    if request.is_ajax() and request.method == 'POST':
+        a = float(sp.sympify(json.loads(request.POST.get('dats'))['a']))
+        b = float(sp.sympify(json.loads(request.POST.get('dats'))['b']))
+        n = int(json.loads(request.POST.get('dats'))['n'])
+        resultado = Simpson13.simpsonCompuesto13(a,b,n)
+        error = abs(error(a, b, n))
+        return JsonResponse({'result':resultado,'error':error, 'success':True})
+    return JsonResponse({'success':False})
+    print("")
+
 def primerCorte(request):
     return render(request, 'calculadora/cortes/corte1.html')
 
@@ -100,34 +116,21 @@ def monteCarlo(request):
 
 
 
-def grafica(request):
-    x = range(-10,10)
-    y = sample(range(20), len(x))
+def grafica(request,funcion, a , b ):
 
-    # Creamos una figura y le dibujamos el gráfico
-    f = plt.figure()
-    # Creamos los ejes
-    axes = f.add_axes([0.15, 0.15, 0.75, 0.75]) # [left, bottom, width, height]
-    axes.plot(x, y)
-    axes.set_xlabel("Eje X")
-    axes.set_ylabel("Eje Y")
-    axes.grid()
-    axes.axhline(0, color="black")
-    axes.axvline(0, color="black")
-    axes.set_title("Grafica de la funcion")
-    # Como enviaremos la imagen en bytes la guardaremos en un buffer
-    buf = io.BytesIO()
-    canvas = FigureCanvasAgg(f)
-    canvas.print_png(buf)
+    func = sp.sympify(funcion)
+      
+    xDats = [i for i in range(int(a),int(b)+1)]
+    yDats = [ func.subs('x',i) for i in xDats]
 
-    # Creamos la respuesta enviando los bytes en tipo imagen png
-    response = HttpResponse(buf.getvalue(), content_type='image/png')
+    fig, ax = plt.subplots()
+    ax.plot(xDats, yDats)
 
-    # Limpiamos la figura para liberar memoria
-    f.clear()
+    ax.set(xlabel='time (s)', ylabel='voltage (mV)',
+           title='About as simple as it gets, folks')
+    ax.grid()
 
-    # Añadimos la cabecera de longitud de fichero para más estabilidad
-    response['Content-Length'] = str(len(response.content))
-
-    # Devolvemos la response
+    response = HttpResponse(content_type = 'image/png')
+    canvas = FigureCanvasAgg(fig)
+    canvas.print_png(response)
     return response
