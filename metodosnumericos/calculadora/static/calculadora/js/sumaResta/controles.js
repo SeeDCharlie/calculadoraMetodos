@@ -72,7 +72,7 @@ $( "#btnMaTrans" ).on( "click", function() {
         alert("NO se han creado las matrices ");
     }else{
         $('#nameOperaUno').empty();
-            $('#nameOperaUno').append("Transpuesta de una matriz ");
+        $('#nameOperaUno').append("Transpuesta de una matriz ");
         var datos = JSON.stringify({
             mUno: getMatrix('matrizTres')
         }); 
@@ -150,6 +150,8 @@ $( "#btnMult" ).on( "click", function() {
     }else{
         if((rowsCols[0][0] == rowsCols[1][0]) || (rowsCols[0][0] == rowsCols[1][1]) ||
         (rowsCols[0][1] == rowsCols[1][1]) || (rowsCols[0][1] == rowsCols[1][0]) ){
+            $('#nameOpera').empty();
+            $('#nameOpera').append("Multiplicacion de Matrices ");
             var datos = JSON.stringify({
                 mUno: getMatrix('matrizUno'),
                 mDos: getMatrix('matrizDos')  
@@ -250,10 +252,16 @@ function getRowsCols(){
 
 $( "#btnCalcularSin13" ).on( "click", function() {
 
+    var ecuacion = $('#ecuaSin13').val();
+    var a = $('#inaSin13').val();
+    var b = $('#inbSin13').val();
+    var n = $('#parSin13').val();
+
+    //calcEcua();
 
 });
 
-function calcEcua(btnName,datos, maResult){
+function calcEcua(btnName,datos, outputUno, outputDos){
     $.ajax({
         url: $('#'+btnName).attr('url'),
         data: {
@@ -265,8 +273,10 @@ function calcEcua(btnName,datos, maResult){
         dataType: 'json',
         success: function (data) {
             if (data.success) {
-
-                showResult(data.matrResult, maResult );     
+                
+                $('#' + outputUno).val(data.resultado);
+                $('#' + outputDos).val(data.error);
+    
             }
             else {
                 alert('error');

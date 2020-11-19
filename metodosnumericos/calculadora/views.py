@@ -24,6 +24,24 @@ from sympy.parsing.sympy_parser import parse_expr
 def index(request):
     return render(request,'calculadora/index.html')
 
+def trapecios(request):
+    return render(request,'calculadora/trapecios.html')
+
+def monteCarlo(request):
+    return render(request, 'calculadora/monteCarlo.html')
+
+def simpson13(request):
+    return render(request, 'calculadora/simpson1_3.html')
+
+def simpson38(request):
+    return render(request, 'calculadora/simpson3_8.html')
+
+def SuMaMu(request):
+    return render(request, 'calculadora/Suma_Resta.html')
+
+def inTraGau(request):
+    return render(request, 'calculadora/Inversa_Trans.html')
+
 @csrf_exempt 
 def calcSumaMatriz(request):
     if request.is_ajax() and request.method == 'POST':
@@ -93,27 +111,6 @@ def calcSimp13(request):
         error = abs(error(a, b, n))
         return JsonResponse({'result':resultado,'error':error, 'success':True})
     return JsonResponse({'success':False})
-    print("")
-
-def primerCorte(request):
-    return render(request, 'calculadora/cortes/corte1.html')
-
-def segundoCorte(request):
-    return render(request, 'calculadora/cortes/corte2.html')
-
-def tercerCorte(request):
-    return render(request, 'calculadora/cortes/corte3.html')
-
-def trapecios(request):
-    return render(request,'')
-
-def monteCarlo(request):
-    if request.GET.get('generar'):
-        print("genero grafica")
-    elif request.GET.get('generar'):
-        print("calcular")
-    return render(request, 'calculadora/monteCarlo.html')
-
 
 
 def grafica(request,funcion, a , b ):
