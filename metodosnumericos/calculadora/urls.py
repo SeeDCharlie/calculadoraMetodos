@@ -8,7 +8,7 @@ from .views import *
 urlpatterns = [
     path('', index),
     path('home/', index,name="home"),
-    path('grafica/', grafica, name="grafica"),
+    path('grafica/(?P<funcion>[^/]+)/(?P<a>[0-9]+)/(?P<b>[0-9]+)', grafica, name="grafica"),
     path('montecarlo/', monteCarlo,name="montecarlo"),
 
     path('primerCorte/', primerCorte, name="primerCorte"),
@@ -23,12 +23,15 @@ urlpatterns = [
     path('calcMultiMatriz/', calcMultMatriz, name='calcMultiMatrix'),
 
     #inversa de una matriz
-    path('calcMaInv', calcMaInver, name = 'calcMaInv'),
+    path('calcMaInv/', calcMaInver, name = 'calcMaInv'),
 
     #transuesta de una matriz
-    path('calcMaTans', calcMaTrans, name = 'calcMaTrans'),
+    path('calcMaTans/', calcMaTrans, name = 'calcMaTrans'),
 
     #gauss Jordan en una matriz
-    path('calcMaGauss', calcMaGauss, name = 'calcMaGauss'),
+    path('calcMaGauss/', calcMaGauss, name = 'calcMaGauss'),
+
+    #simpson1/3
+    path('calcSimpson13/' , calcSimp13 , name = 'calcSimp13'),
 
 ]

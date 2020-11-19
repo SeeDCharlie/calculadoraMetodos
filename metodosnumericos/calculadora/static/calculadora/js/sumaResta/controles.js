@@ -230,7 +230,7 @@ function createMatrix(rows, cols, id_mariz) {
     for ( r = 0; r < rows; r++){
         content += "<tr>";
         for(c = 0; c < cols; c++){
-            content += "<td><input type='number' style = 'width: 40px;-webkit-appearance: none;'></td> ";
+            content += "<td><input type='number';-webkit-appearance: none;'></td> ";
         }
         content += "</tr>";
     }
@@ -243,4 +243,37 @@ function getRowsCols(){
     var dat = [[parseInt($('#rowsUno').val(), 10),parseInt($('#colsUno').val(),10)],
                 [parseInt($('#rowsDos').val(),10),parseInt($('#colsDos').val(),10)]];
     return dat;
+}
+
+//-------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------
+
+$( "#btnCalcularSin13" ).on( "click", function() {
+
+
+});
+
+function calcEcua(btnName,datos, maResult){
+    $.ajax({
+        url: $('#'+btnName).attr('url'),
+        data: {
+            dats:datos,
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            if (data.success) {
+
+                showResult(data.matrResult, maResult );     
+            }
+            else {
+                alert('error');
+            }
+        },
+        error: function () {
+            alert("Incongruencia en los datos!!");
+        }
+    });
 }
