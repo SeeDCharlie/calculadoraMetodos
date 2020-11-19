@@ -8,12 +8,24 @@ from .views import *
 urlpatterns = [
     path('', index),
     path('home/', index,name="home"),
+    
     path('grafica/<str:funcion>/<str:a>/<str:b>', grafica, name="grafica"),
+    
     path('montecarlo/', monteCarlo,name="montecarlo"),
 
-    path('primerCorte/', primerCorte, name="primerCorte"),
-    path('segundoCorte/', segundoCorte, name="segundoCorte"),
-    path('tercerCorte/', tercerCorte, name="tercerCorte"),
+    path('trapecios/', trapecios,name="trapecios"),
+
+    #suma resta y multiplicacion
+    path('SuReMu/',SuMaMu , name = 'SuMaMu'),
+
+    #inversa transpuesta y gauss jordan
+    path('inTraGau/',inTraGau , name = 'inTraGau'),
+
+    #simpson 1/3
+    path('simpson13/', simpson13, name = 'simpson13'),
+
+    #simpson 3/8
+    path('simpson38/', simpson38, name = 'simpson38'),
 
     #url para el calculo de la suma y resta de matrices
     path('restaM/', calcRestaMatriz, name = 'calcRestaMatriz'),
