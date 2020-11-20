@@ -10,10 +10,16 @@ urlpatterns = [
     path('home/', index,name="home"),
     
     path('grafica/<str:funcion>/<str:a>/<str:b>', grafica, name="grafica"),
+
+    path('IEEE/', IEEE,name="IEEE"),
     
+    path('converBases/', converBases,name="converBases"),
+
     path('montecarlo/', monteCarlo,name="montecarlo"),
 
     path('trapecios/', trapecios,name="trapecios"),
+
+    path('rectangulos/', rectangulos,name="rectangulos"),
 
     #suma resta y multiplicacion
     path('SuReMu/',SuMaMu , name = 'SuMaMu'),

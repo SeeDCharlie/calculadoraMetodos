@@ -24,8 +24,17 @@ from sympy.parsing.sympy_parser import parse_expr
 def index(request):
     return render(request,'calculadora/index.html')
 
+def IEEE(request):
+    return render(request,'calculadora/IEEE.html')   
+
+def converBases(request):
+    return render(request,'calculadora/conversionesBases.html')    
+
 def trapecios(request):
     return render(request,'calculadora/trapecios.html')
+
+def rectangulos(request):
+    return render(request,'calculadora/rectangulos.html')    
 
 def monteCarlo(request):
     return render(request, 'calculadora/monteCarlo.html')

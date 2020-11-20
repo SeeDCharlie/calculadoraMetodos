@@ -1,22 +1,12 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-</head>
-<body>
+{% extends 'calculadora/index.html' %}
 
-
+{% block content %}
 
 <div class="row">
   <div class="col-sm-7">
         <div class="d-flex flex-column justify-content-left">
             <div class="p-4">
 
-                    <form class="form-horizontal" action="{% url 'montecarlo' %}" method="GET">
 
                         <div class="form-group">
                         <label class="control-label col-sm-8" >Ingrese la ecuación:</label>
@@ -77,14 +67,12 @@
                             <output type="number" class="form-control" id="puntoMedRect" placeholder="Medio">  
                         </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="control-label col-sm-10" for="extDeRect">Resultado Ext. Derecho:</label>                                            
                         <div class="col-sm-10">
                             <output type="number" class="form-control" id="extDeRect" placeholder="Derecho">  
-                        </div>
-                        
-                        </form>
+                        </div>                        
                         
                         </div>
 
@@ -106,12 +94,4 @@
   </div>
 </div>
 
-
-
-
-
-<script src="{% static 'calculadora/js/monteCarlo/controller.js' %}"></script>
-<script src="{% static 'calculadora/js/jquery-3.5.1.js' %}"></script>
-
-</body>
-</html>
+{% endblock %}

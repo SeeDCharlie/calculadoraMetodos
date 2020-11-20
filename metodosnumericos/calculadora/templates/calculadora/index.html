@@ -24,8 +24,8 @@
             Primer Corte
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Calculadora Conversiones</a>
-            <a class="dropdown-item" href="#">IEEE</a>
+            <a class="dropdown-item" href="{% url 'converBases' %}">Calculadora Conversiones</a>
+            <a class="dropdown-item" href="{% url 'IEEE' %}">IEEE</a>
         </li>
 
         <li class="nav-item dropdown">
@@ -37,6 +37,7 @@
             <a class="dropdown-item" href="{% url 'simpson13' %}">Simpson 1/3</a>
             <a class="dropdown-item" href="{% url 'simpson38' %}">Simpson 3/8</a>
             <a class="dropdown-item" href="{% url 'trapecios' %}">Trapecios</a>
+            <a class="dropdown-item" href="{% url 'rectangulos' %}">Rectangulos</a>
         </li>
 
         <li class="nav-item dropdown">
