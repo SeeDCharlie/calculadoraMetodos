@@ -5,6 +5,7 @@ import urllib
 import base64
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
+from matplotlib.figure import Figure
 from random import sample
 from io import StringIO
 from calculadora.motores import SumaResta
@@ -28,44 +29,33 @@ from sympy.abc import x, y
 def index(request):
     return render(request, 'calculadora/index.html')
 
-
 def IEEE(request):
     return render(request, 'calculadora/IEEE.html')
-
 
 def converBases(request):
     return render(request, 'calculadora/conversionesBases.html')
 
-
 def trapecios(request):
     return render(request, 'calculadora/trapecios.html')
-
 
 def rectangulos(request):
     return render(request, 'calculadora/rectangulos.html')
 
-
 def monteCarlo(request):
     return render(request, 'calculadora/monteCarlo.html')
-
 
 def simpson13(request):
     return render(request, 'calculadora/simpson1_3.html')
 
-
 def simpson38(request):
     return render(request, 'calculadora/simpson3_8.html')
-
 
 def SuMaMu(request):
     return render(request, 'calculadora/Suma_Resta.html')
 
-
 def inTraGau(request):
     return render(request, 'calculadora/Inversa_Trans.html')
 
-
-@csrf_exempt
 def calcSumaMatriz(request):
     if request.is_ajax() and request.method == 'POST':
         mDos = json.loads(request.POST.get('dats'))['mUno']
@@ -74,8 +64,6 @@ def calcSumaMatriz(request):
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
 
-
-@csrf_exempt
 def calcRestaMatriz(request):
     if request.is_ajax() and request.method == 'POST':
         mDos = json.loads(request.POST.get('dats'))['mDos']
@@ -86,8 +74,6 @@ def calcRestaMatriz(request):
 
 # multiplicacion de matrices
 
-
-@csrf_exempt
 def calcMultMatriz(request):
     if request.is_ajax() and request.method == 'POST':
         mUno = json.loads(request.POST.get('dats'))['mUno']
@@ -97,9 +83,6 @@ def calcMultMatriz(request):
     return JsonResponse({'success': False})
 
 # inversa de una matriz
-
-
-@csrf_exempt
 def calcMaInver(request):
     if request.is_ajax() and request.method == 'POST':
         mUno = json.loads(request.POST.get('dats'))['mUno']
@@ -107,8 +90,6 @@ def calcMaInver(request):
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
 
-
-@csrf_exempt
 # transpuesta de una matriz
 def calcMaTrans(request):
     if request.is_ajax() and request.method == 'POST':
@@ -117,8 +98,6 @@ def calcMaTrans(request):
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
 
-
-@csrf_exempt
 # metodo de gauss jordan a una matriz
 def calcMaGauss(request):
     if request.is_ajax() and request.method == 'POST':
@@ -133,9 +112,6 @@ def calcMaGauss(request):
         return JsonResponse({'matrResult': [matrizResultado], 'success': True})
     return JsonResponse({'success': False})
 
-
-
-
 def calcSimp13(request):
     if request.is_ajax() and request.method == 'POST':
         m = Simpson13.mSimp13()
@@ -149,6 +125,21 @@ def calcSimp13(request):
         return JsonResponse({'uno': str(resultado), "dos": str(error),"tres":'', 'success': True})
     return JsonResponse({'success':False})
 
+def calcMonte(request):
+
+    if request.is_ajax() and request.method == 'POST':
+        m = Simpson13.mSimp13()
+        m.funcion = sp.sympify(json.loads(request.POST.get('dats'))['funcion'])
+        a = float(sp.sympify(json.loads(request.POST.get('dats'))['a']))
+        b = float(sp.sympify(json.loads(request.POST.get('dats'))['b']))
+        n = int(json.loads(request.POST.get('dats'))['n'])
+        resultado = m.simpsonCompuesto13(a, b, n)
+        error = abs(m.error(a, b, n))
+        print("r simpson 1/3 : ", resultado , "  error : ", error)
+        return JsonResponse({'uno': str(resultado), "dos": str(error),"tres":'', 'success': True})
+    return JsonResponse({'success':False})
+
+
 
 def grafica(request,funcion, a , b ):
 
@@ -157,14 +148,16 @@ def grafica(request,funcion, a , b ):
     xDats = [i for i in np.arange(float(a),float(b)+1.0, 0.3)]
     yDats = [ float('{:.15f}'.format(float(func.subs('x',i)))) for i in xDats]
 
-    fig, ax = plt.subplots()
+    fig = Figure()
+    canvas = FigureCanvasAgg(fig)
+    ax = fig.add_subplot(111)
     ax.plot(xDats, yDats)
 
     ax.set(xlabel='eje x', ylabel='eje y',
            title='Grafica de la Funcion')
     ax.grid()
 
-    response = HttpResponse(content_type = 'image/png')
-    canvas = FigureCanvasAgg(fig)
-    canvas.print_png(response)
+    response = HttpResponse(content_type = 'image/jpg')
+    
+    canvas.print_jpg(response)
     return response
