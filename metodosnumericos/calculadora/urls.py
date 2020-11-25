@@ -62,6 +62,10 @@ urlpatterns = [
 
     path('calcMonte/', calcMonte, name = 'calcMonte'),
 
-    path('calcSimp38', calcSimp38, name = 'calcSimp38'),
+    path('calcSimp38/', calcSimp38, name = 'calcSimp38'),
+
+    path('calcTrapecios/', calcTrapecios, name = 'calcTrapecios'),
+
+    path('calcRectangulos', calcRectangulos, name = 'calcRectangulos'),
 
 ]

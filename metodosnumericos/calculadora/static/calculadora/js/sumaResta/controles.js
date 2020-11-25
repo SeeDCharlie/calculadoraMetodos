@@ -248,6 +248,7 @@ function getRowsCols(){
 }
 
 function graficarFuncion(funcion, a, b, nameImg){
+
     $("#"+nameImg).attr("src","/grafica/"+funcion+"/"+a+"/"+b);
     
 }
@@ -429,6 +430,27 @@ $("#btnGenGrafMonte").on("click", function(){
 //-------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------
 //-------metodos trapecios
+$("#btnCalcularTrap").on("click", function(){
+    alert("btn trapecios");
+    var funcion = $("#ecuaTrap").val();
+    var _a = $("#inaTrap").val();
+    var _b = $("#inbTrap").val();
+    var _n = $("#parTrap").val();
+    if(funcion != "" && _a != "" && _b != "" && _n != ""){
+        var datos = JSON.stringify({
+            funcion:funcion,
+            a:_a,
+            b:_b,
+            n:_n
+        });
+        alert("calc trapecios!! datos : " + datos);
+        calcEcua("btnCalcularTrap", datos, "reTrap","errTrap","");
+
+    }else{
+        alert("Hay Campos Vacios!!!")
+    }
+    
+});
 
 $("#btnIntervalosTrap").on("click", function(){
 
@@ -480,4 +502,25 @@ $("#btnGraficarRect").on("click", function(){
     else{   
         alert("Ingrese Una funcion");
     }
+});
+$("#btnCalcularRect").on("click", function(){
+    alert("btn Rectangulos");
+    var funcion = $("#ecuaRect").val();
+    var _a = $("#inaRect").val();
+    var _b = $("#inbRect").val();
+    var _n = $("#parRect").val();
+    if(funcion != "" && _a != "" && _b != "" && _n != ""){
+        var datos = JSON.stringify({
+            funcion:funcion,
+            a:_a,
+            b:_b,
+            n:_n
+        });
+        alert("calc rectangulos!! datos : " + datos);
+        calcEcua("btnCalcularRect", datos, "extIzRect","extDeRect","puntoMedRect");
+
+    }else{
+        alert("Hay Campos Vacios!!!")
+    }
+    
 });

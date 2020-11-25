@@ -46,7 +46,7 @@ def ComprobarN(n):##_________________________________________(2)
     else:
         return False
 
-def MetodoTrapecioslocos(f,a,b,n):##___________________________(1)    
+def trapecios(f,a,b,n):##___________________________(1)    
     print ("Metodo Trapecios Locos")
     if ComprobarN(n):
         print("El valor de los rectangulos si es entero positivo ="+str(n))
@@ -75,7 +75,7 @@ def MetodoTrapecioslocos(f,a,b,n):##___________________________(1)
             Err=ErroTruncamiento(f,a,b)
             print("El Error de truncamiento es = "+str(Err))
             
-            return suma
+            return [suma, Err]
         else:
             print ("Solo se evalua con un trapecio")
             suma=suma+(  Ordenar_Funcion(a,f))
@@ -86,7 +86,7 @@ def MetodoTrapecioslocos(f,a,b,n):##___________________________(1)
             print("area es = "+str(suma))
             Err=ErroTruncamiento(f,a,b)
             print("El Error de truncamiento es = "+str(Err))
-            return suma
+            return [suma, Err]
         #**
 
     else:
@@ -117,9 +117,11 @@ def ErroTruncamiento(f,a,b):
 #"(x**3)/(1+(x**(1/2)))"
 #"(sin((1/2)+x**2))/((1/2)+x**2)"  -pi/2
 #"((1)/(sqrt(2*pi)))*exp((-x**2)/(2))"
+"""
 Funcion = "exp(x/2)+(cos(1/2+x))/(1/2+x)"
 ValorA  = 0
 ValorB  = 3.1416
 Trapecios= int(1000)
 print ("inicio")
-MetodoTrapecioslocos(Funcion,ValorA,ValorB,Trapecios)
+print(trapecios(Funcion,ValorA,ValorB,Trapecios) )
+"""
