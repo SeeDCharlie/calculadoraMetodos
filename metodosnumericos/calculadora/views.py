@@ -236,19 +236,23 @@ def calcNewton(request):
 @csrf_exempt
 def calcPolinomio(request):
     if request.is_ajax() and request.method == 'POST':
-        coheficientes = float(sp.sympify(json.loads(request.POST.get('dats'))['valor_x']))
-
-        resultado = Polinomio.polinomio(len(coheficientes), coheficientes)
+        coeficientes = list(sp.sympify(json.loads(request.POST.get('dats'))['coeficientes']))
+        grado = int(sp.sympify(json.loads(request.POST.get('dats'))['grado']))
+        print("coeficientes : ", coeficientes)
+        resultado = Polinomio.polinomio(grado, coeficientes)
         print("r polinomios : ", resultado )
-        return JsonResponse({'uno': str(resultado[0]), "dos": '',"tres":'', 'success': True})
+        return JsonResponse({'uno': str(resultado), "dos": '',"tres":'', 'success': True})
     return JsonResponse({'success':False})
 
 def grafica(request,funcion, a , b ):
 
-    func = sp.sympify(funcion)
+
+    U, D = sp.symbols('U D')
+    div = lambda U,D: U/D
+    func = sp.sympify(funcion, locals = {'div': div})
       
     xDats = [i for i in np.arange(float(a),float(b)+1.0, 0.3)]
-    yDats = [ float('{:.15f}'.format(float(func.subs('x',i)))) for i in xDats]
+    yDats = [ float('{:.15f}'.format(float(func.subs(x,i)))) for i in xDats]
 
     fig = Figure()
     canvas = FigureCanvasAgg(fig)

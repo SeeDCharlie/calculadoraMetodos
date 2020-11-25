@@ -68,8 +68,8 @@ def polinomio(g,coheficientes ):
 	s = random.random()
 
 	bairstow(coheficientes, r, s, g, roots)
-
-	return "\n".join(roots)
+	r = ""
+	return "\n".join([str(dat) for dat in roots])
 
 
 

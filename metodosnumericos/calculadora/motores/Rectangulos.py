@@ -96,7 +96,7 @@ def MetodoRentangulos(f,a,b,n):##____________________________(1)
         valores=Valores(a,b,Delta,n)
         print("ValoreDelta "+str(Delta)+"nuemero n="+str(n))  
         
-        return [Izquierda(f,a,b,n,Delta,valores), Derecha(f,a,b,n,Delta,valores), PuntoMedio(f,a,b,n,Delta,valores) ]
+        return [abs(Izquierda(f,a,b,n,Delta,valores)), abs(Derecha(f,a,b,n,Delta,valores)), abs(PuntoMedio(f,a,b,n,Delta,valores)) ]
     else:
         print ("El valor de los rectangulos no es entero positivo")
         return ["Nan","Nan", "Nan"]
