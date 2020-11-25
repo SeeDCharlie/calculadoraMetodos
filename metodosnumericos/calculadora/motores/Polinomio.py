@@ -4,6 +4,13 @@ import random
 #import numpy as np
 #import matplotlib.pyplot as plt
 
+class motorPolinomio:
+
+	def __init__(self):
+		self.g = -1
+
+
+
 def bairstow(a, r, s, g, roots):
 	if (g < 1):
 		return None
@@ -54,9 +61,19 @@ def bairstow(a, r, s, g, roots):
 		roots.append(X2)
 		return bairstow(b[2:], r, s, g-2, roots)
 
-print("Método de Bairstow\n")
+def polinomio(g,coheficientes ):
+	j = 1
+	roots = []
+	r = random.random()
+	s = random.random()
 
-x, y = sp.symbols('x y')
+	bairstow(coheficientes, r, s, g, roots)
+
+	return "\n".join(roots)
+
+
+
+"""
 g = int(input("¿Cuál es el grado del polinomio?: "))
 print("Dijita los coeficientes en orden ascendente:\n")
 
@@ -95,3 +112,4 @@ for r in roots:
 	j += 1
 
 sp.plot(funcion,(x, -3, 3), title="Gráfica de "+str(ecuacion), aspect_ratio='auto')
+"""

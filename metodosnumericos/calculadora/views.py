@@ -17,6 +17,7 @@ from calculadora.motores import Rectangulos
 from calculadora.motores import Biseccion
 from calculadora.motores import Falsa_posicion
 from calculadora.motores import Newton_Rhapson
+from calculadora.motores import Polinomio
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -232,6 +233,15 @@ def calcNewton(request):
         return JsonResponse({'uno': str(resultado[0]), "dos": str(resultado[1]),"tres":'', 'success': True})
     return JsonResponse({'success':False})
 
+@csrf_exempt
+def calcPolinomio(request):
+    if request.is_ajax() and request.method == 'POST':
+        coheficientes = float(sp.sympify(json.loads(request.POST.get('dats'))['valor_x']))
+
+        resultado = Polinomio.polinomio(len(coheficientes), coheficientes)
+        print("r polinomios : ", resultado )
+        return JsonResponse({'uno': str(resultado[0]), "dos": '',"tres":'', 'success': True})
+    return JsonResponse({'success':False})
 
 def grafica(request,funcion, a , b ):
 
