@@ -29,6 +29,18 @@ from sympy.abc import x, y
 def index(request):
     return render(request, 'calculadora/index.html')
 
+def polinomio(request):
+    return render(request, 'calculadora/polinomio.html')
+
+def newton_Rhapson(request):
+    return render(request, 'calculadora/newton_Rhapson.html')
+    
+def falsa_posicion(request):
+    return render(request, 'calculadora/falsa_posicion.html')
+
+def biseccion(request):
+    return render(request, 'calculadora/biseccion.html')
+
 def IEEE(request):
     return render(request, 'calculadora/IEEE.html')
 

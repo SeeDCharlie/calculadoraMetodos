@@ -11,6 +11,14 @@ urlpatterns = [
     
     path('grafica/<str:funcion>/<str:a>/<str:b>', grafica, name="grafica"),
 
+    path('polinomio/', polinomio,name="polinomio"),
+
+    path('newton_Rhapson/', newton_Rhapson,name="newton_Rhapson"),
+
+    path('falsa_posicion/', falsa_posicion,name="falsa_posicion"),
+    
+    path('biseccion/', biseccion,name="biseccion"),
+
     path('IEEE/', IEEE,name="IEEE"),
     
     path('converBases/', converBases,name="converBases"),
