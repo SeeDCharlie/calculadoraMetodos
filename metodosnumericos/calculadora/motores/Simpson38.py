@@ -54,7 +54,8 @@ a = float(sp.sympify(input("Dijite el extremo inferior del intervalo (a): ")))
 b = float(sp.sympify(input("Dijite el extremo superior del intervalo (b): ")))
 n = int(input("Dijite el número de particiones (debe ser entero): "))
 
-print("\nAproximación: ", simpson38(a, b, n))
+print("\nAproximación: ", 
+(a, b, n))
 print("Error absoluto: ", abs(error(a, b, n)))
 
 sp.plot(funcion, (x, a-0.2, b+0.2), title = 'Intervalo seleccionado: ' + str(a) + " , " + str(b))

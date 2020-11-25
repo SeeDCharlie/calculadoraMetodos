@@ -329,6 +329,23 @@ $( "#btnCalcularSin13" ).on( "click", function() {
 //-------------------------------------------------------------------------------------------------------
 //-------metodos simpson 3 / 8
 
+$( "#btnCalcularSin38" ).on( "click", function() {
+
+    var ecuacion = $('#ecuaSin38').val();
+    var _a = $('#inaSin38').val();
+    var _b = $('#inbSin38').val();
+    var _n = $('#parSin38').val();
+    var datos = JSON.stringify({
+        funcion:ecuacion,
+        a:_a,
+        b:_b,
+        n:_n
+    });
+    alert("datoss38 : " + datos);
+    var r = calcEcua("btnCalcularSin38", datos,"reSin38", "errSin38", "" );
+
+});
+
 $("#btnIntervalosSin38").on("click", function(){
 
     var funcion = $("#ecuaSin38").val();
@@ -359,6 +376,31 @@ $("#btnGraficarSin38").on("click", function(){
 //-------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------
 //-------metodos montecarlo
+
+
+$("#btnCalcMonte").on("click", function(){
+    alert("btn monte carlo");
+    var funcion = $("#ecuacionMonte").val();
+    var _a = $("#aMonte").val();
+    var _b = $("#bMonte").val();
+    var _k = $("#kMonte").val();
+    var _n = $("#nMonte").val();
+    if(funcion != "" && _a != "" && _b != "" && _k != "" && _n != ""){
+        var datos = JSON.stringify({
+            funcion:funcion,
+            a:_a,
+            b:_b,
+            k:_k,
+            n:_n
+        });
+        alert("calc monte!! datos : " + datos);
+        calcEcua("btnCalcMonte", datos, "resMonte","","");
+
+    }else{
+        alert("Hay Campos Vacios!!!")
+    }
+    
+});
 
 $("#btnGraIntervMonte").on("click", function(){
 
