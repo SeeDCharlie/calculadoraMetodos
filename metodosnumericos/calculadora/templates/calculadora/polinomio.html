@@ -1,7 +1,6 @@
 {% extends 'calculadora/index.html' %}
 
 {% block content %}
-<<<<<<< HEAD
 
 
 <div class="row">
@@ -51,87 +50,10 @@
 
                 </div>
             </div>
-=======
-
-
-<html>
-<head>
-    <script type='text/javascript'>
-        function addFields(){
-            // Number of inputs to create
-            var number = document.getElementById("valorX").value;
-            // Container <div> where dynamic content will be placed
-            var container = document.getElementById("container");
-            // Clear previous contents of the container
-            while (container.hasChildNodes()) {
-                container.removeChild(container.lastChild);
-            }
-            for (i=0;i<number;i++){
-                // Append a node with a random text
-                container.appendChild(document.createTextNode("Valor #" + (i+1)));
-                // Create an <input> element, set its type and name attributes
-                var input = document.createElement("input");
-                input.type = "text";
-                input.name = "valorX" + i;
-                container.appendChild(input);
-                // Append a line break 
-                container.appendChild(document.createElement("br"));
-            }
-        }
-    </script>
-</head>
-<body>
-
-    <div class="row">
-        <div class="col-sm-7">
-              <div class="d-flex flex-column justify-content-left">
-                  <div class="p-4">
-      
-                
-                              <div class="form-group">
-                              
-                              <label class="control-label col-sm-8" >Ingrese Polinomio:</label>
-                              <div class="col-sm-10">
-                              <input type="text" class="form-control" id="ecuaPoli" placeholder="Ingrese p(x)">
-                              </div>
-                              <br>     
-                              <label class="control-label col-sm-8" for="gradoPoli">Grado polinomio:</label>
-                              <div class="col-sm-3">                                      
-                                <input type="number" id="valorX" name="valorX" value="" class="form-control" placeholder="Mayor a 0" ><br />
-                                                                                              
-                                <div id="container"/>                               
-                              </div>                              
-                              </div>                                                                        
-                              <br>
-                              <a style="position: absolute; left: 6.7%;" href="#" type="button" class="btn btn-warning" id="filldetails" onclick="addFields()">Grado de X</a>
-                              <br>
-                              <br>
-      
-                              <div class="form-group">
-                              <div class="col-sm-offset-2 col-sm-10">
-                                  {% csrf_token %}    
-                              <button type="button" class="btn btn-primary" id="btnCalcularPoli" url="{% url 'calcSimp13' %}">Calcular Polinomio</button>  
-                              <button style="position: absolute; right: 3%;" type="button" class="btn btn-success" id="btnGraficarPoli">Generar grafica</button>                      
-                              
-      
-                              </div>
-                              </div>                        
-                              <br>
-                              <div class="form-group">
-                                  <label class="control-label col-sm-10" for="rePoli">Resultado:</label>                                              
-                              <div class="col-sm-10">
-                                  <textarea id="rePoli" rows=6 cols=80 wrap=on readonly placeholder="Raices..."></textarea>                        
-                              </div>                        
-                              </div>                   
-      
-                  </div>
-              </div>
->>>>>>> 3ec2980c5ccb1b96de71805bcf1cf11e8876da79
         </div>
     </div>
     <div class="col-sm-3">
         <div class="d-flex flex-column">
-<<<<<<< HEAD
             <div class="p-4">
                 <img src="{%url 'grafica' funcion='x^2' a=-12 b=12 %}" height="300" width="400" id="imgUnoPoli">
             </div>
@@ -139,15 +61,6 @@
         </div>
     </div>
     <!-- xddddddd -->
-=======
-          <div class="p-4">
-              <img src="{%url 'grafica' funcion='x^2' a=-12 b=12 %}" height="300" width="400" id="imgUnoSin13">                  
-          </div>
-  
-    </div>
-  </div>
-<!-- xddddddd -->
->>>>>>> 3ec2980c5ccb1b96de71805bcf1cf11e8876da79
 </div>
 </body>
 </html>
