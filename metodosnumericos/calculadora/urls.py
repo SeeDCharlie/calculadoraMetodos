@@ -66,6 +66,11 @@ urlpatterns = [
 
     path('calcTrapecios/', calcTrapecios, name = 'calcTrapecios'),
 
-    path('calcRectangulos', calcRectangulos, name = 'calcRectangulos'),
+    path('calcRectangulos/', calcRectangulos, name = 'calcRectangulos'),
+    
+    path('calcBiseccion/', calcBiseccion, name = 'calcBiseccion'),
 
+    path('calcFalsaPoci/', calcFalsaPoci, name = 'calcFalsaPoci'),
+
+    path('calcNewton/', calcNewton, name = 'calcNewton'),
 ]

@@ -3,47 +3,53 @@ import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
 
-def f(x):
-	b = funcion.free_symbols
-	var = b.pop()
-	valor = funcion.evalf(subs={var:x})
-	return valor
 
-def biseccion(a, b, tolerancia):
+class motorBisec :
 
-	error = 10
+	def __init__(self, func):
+		self.funcion = func
 
-	if (f(a) * f(b) <0):
+	def f(self,x):
+		b = self.funcion.free_symbols
+		var = b.pop()
+		valor = self.funcion.evalf(subs={var:x})
+		return valor
 
-		contador = 1
-		print("")
+	def biseccion(self, a, b, tolerancia):
+
+		error = 10
+
+		if (self.f(a) * self.f(b) < 0):
+
+			contador = 1
+			print("")
 	
 
-		while error > tolerancia and contador < 200:
+			while error > tolerancia and contador < 200:
 
-			m = (a + b) / 2
-			fa = f(a)
-			fm = f(m)
-
-			tabla.add_row([contador, "%.8f"%a, "%.8f"%b, "%.8f"%f(a), "%.8f"%f(b), "%.8f"%m, "%.8f"%f(m), "%.8f"%abs(fm)])
-
-			if fm == 0:
+				m = (a + b) / 2
+				fa = self.f(a)
+				fm = self.f(m)
+			
+				if fm == 0:
+					raiz = m
+					break
+				elif fa * fm < 0:
+					b = m
+				else:
+					a = m
 				raiz = m
-				break
-			elif fa * fm < 0:
-				b = m
-			else:
-				a = m
-			raiz = m
-			error = abs(fm)
-			contador = contador + 1
+				error = abs(fm)
+				contador = contador + 1
 	
-		print(tabla)
-		print("\nLa raíz es: ", raiz)
-		print("El error relativo es: ", error)
-	else:
-		print("\nLos intervalos no contienen la raíz")
-
+	
+			print("\nLa raíz es: ", raiz)
+			print("El error relativo es: ", error)
+			return [raiz, error]
+		else:
+			print("\nLos intervalos no contienen la raíz")
+			return ['Los intervalos no contienen la raíz','Nan']
+"""
 print("Método de Bisección\n")
 x, y = sp.symbols('x y')
 str_ecuacion = input("Ingrese la ecuación:\n")
@@ -58,3 +64,4 @@ tolerancia = float(input("Digite el error de tolerancia: "))
 biseccion(a, b, tolerancia)
 
 sp.plot(funcion, (x, a-0.5, b+0.5), title = 'Intervalo seleccionado: ' + str(a) + " , " + str(b))
+"""

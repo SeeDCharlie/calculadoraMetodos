@@ -46,7 +46,7 @@
                         <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             {% csrf_token %}    
-                        <button type="button" class="btn btn-primary" id="btnCalcularBise" url="{% url 'calcSimp13' %}">Calcular Bisección</button>                        
+                        <button type="button" class="btn btn-primary" id="btnCalcularBise" url="{% url 'calcBiseccion' %}">Calcular Bisección</button>                        
                         <button style="position: absolute; right: 3%;" type="button" class="btn btn-success" id="btnGraficarBise">Generar grafica</button>
 
                         </div>
@@ -74,12 +74,12 @@
       <div class="d-flex flex-column">
         
         <div class="p-4">
-            <img src="{%url 'grafica' funcion='x^2' a=-12 b=12 %}" height="300" width="400" id="imgUnoSin13">                  
+            <img src="{%url 'grafica' funcion='x^2' a=-12 b=12 %}" height="300" width="400" id="imgUnoBisec">                  
         </div>
         
         <div class="d-flex flex-row">
             <div class="p-4">
-                <img src="{%url 'grafica' funcion='x^2' a=-12 b=12 %}" height="300" width="400" id="imgDosSin13">    
+                <img src="{%url 'grafica' funcion='x^2' a=-12 b=12 %}" height="300" width="400" id="imgDosBisec">    
             </div>                              
       </div>
   </div>
