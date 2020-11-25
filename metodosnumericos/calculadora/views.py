@@ -10,6 +10,8 @@ from random import sample
 from io import StringIO
 from calculadora.motores import SumaResta
 from calculadora.motores import Simpson13
+from calculadora.motores import Simpson38
+from calculadora.motores import MonteCarlo
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -55,7 +57,7 @@ def SuMaMu(request):
 
 def inTraGau(request):
     return render(request, 'calculadora/Inversa_Trans.html')
-
+@csrf_exempt
 def calcSumaMatriz(request):
     if request.is_ajax() and request.method == 'POST':
         mDos = json.loads(request.POST.get('dats'))['mUno']
@@ -63,7 +65,7 @@ def calcSumaMatriz(request):
         matrizResultado = SumaResta.suma(mUno, mDos).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
-
+@csrf_exempt
 def calcRestaMatriz(request):
     if request.is_ajax() and request.method == 'POST':
         mDos = json.loads(request.POST.get('dats'))['mDos']
@@ -71,9 +73,8 @@ def calcRestaMatriz(request):
         matrizResultado = SumaResta.resta(mUno, mDos).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
-
+@csrf_exempt
 # multiplicacion de matrices
-
 def calcMultMatriz(request):
     if request.is_ajax() and request.method == 'POST':
         mUno = json.loads(request.POST.get('dats'))['mUno']
@@ -81,7 +82,7 @@ def calcMultMatriz(request):
         matrizResultado = motorMAtrix.multiMatrix(mUno, mDos).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
-
+@csrf_exempt
 # inversa de una matriz
 def calcMaInver(request):
     if request.is_ajax() and request.method == 'POST':
@@ -89,7 +90,7 @@ def calcMaInver(request):
         matrizResultado = motorMAtrix.matrizInver(mUno).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
-
+@csrf_exempt
 # transpuesta de una matriz
 def calcMaTrans(request):
     if request.is_ajax() and request.method == 'POST':
@@ -97,7 +98,7 @@ def calcMaTrans(request):
         matrizResultado = motorMAtrix.matrixTran(mUno).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
-
+@csrf_exempt
 # metodo de gauss jordan a una matriz
 def calcMaGauss(request):
     if request.is_ajax() and request.method == 'POST':
@@ -111,7 +112,7 @@ def calcMaGauss(request):
                             for i, dat in enumerate(matrizResultado)]
         return JsonResponse({'matrResult': [matrizResultado], 'success': True})
     return JsonResponse({'success': False})
-
+@csrf_exempt
 def calcSimp13(request):
     if request.is_ajax() and request.method == 'POST':
         m = Simpson13.mSimp13()
@@ -125,20 +126,31 @@ def calcSimp13(request):
         return JsonResponse({'uno': str(resultado), "dos": str(error),"tres":'', 'success': True})
     return JsonResponse({'success':False})
 
-def calcMonte(request):
-
+@csrf_exempt
+def calcSimp38(request):
     if request.is_ajax() and request.method == 'POST':
-        m = Simpson13.mSimp13()
+        m = Simpson38.mSimp38()
         m.funcion = sp.sympify(json.loads(request.POST.get('dats'))['funcion'])
         a = float(sp.sympify(json.loads(request.POST.get('dats'))['a']))
         b = float(sp.sympify(json.loads(request.POST.get('dats'))['b']))
         n = int(json.loads(request.POST.get('dats'))['n'])
-        resultado = m.simpsonCompuesto13(a, b, n)
+        resultado = m.simpson38(a, b, n)
         error = abs(m.error(a, b, n))
         print("r simpson 1/3 : ", resultado , "  error : ", error)
         return JsonResponse({'uno': str(resultado), "dos": str(error),"tres":'', 'success': True})
     return JsonResponse({'success':False})
-
+@csrf_exempt
+def calcMonte(request):
+    if request.is_ajax() and request.method == 'POST':
+        funcion = json.loads(request.POST.get('dats'))['funcion']
+        a = float(sp.sympify(json.loads(request.POST.get('dats'))['a']))
+        b = float(sp.sympify(json.loads(request.POST.get('dats'))['b']))
+        k = float(sp.sympify(json.loads(request.POST.get('dats'))['k']))
+        n = int(json.loads(request.POST.get('dats'))['n'])
+        resultado = MonteCarlo.montecarlo(a, b, k, n, funcion)
+        print("r monte carlo 1/3 : ", resultado , "  error : ", error)
+        return JsonResponse({'uno': str(resultado), "dos": '',"tres":'', 'success': True})
+    return JsonResponse({'success':False})
 
 
 def grafica(request,funcion, a , b ):

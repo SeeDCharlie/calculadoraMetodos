@@ -52,4 +52,8 @@ urlpatterns = [
     #simpson1/3
     path('calcSimpson13/' , calcSimp13 , name = 'calcSimp13'),
 
+    path('calcMonte/', calcMonte, name = 'calcMonte'),
+
+    path('calcSimp38', calcSimp38, name = 'calcSimp38'),
+
 ]
