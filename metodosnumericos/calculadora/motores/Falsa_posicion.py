@@ -3,47 +3,53 @@ import sympy as sp
 #import numpy as np
 #import matplotlib.pyplot as plt
 
-def f(x):
-	b = funcion.free_symbols
-	var = b.pop()
-	valor = funcion.evalf(subs = {var:x})
-	return valor
 
-def falsaPosicion(a, b, tolerancia):
+class motorFalsaPoci :
 
-	error = 10
+	def __init__(self, funcion):
+		self.funcion = funcion
+	
 
-	if (f(a) * f(b) < 0):
+	def f(self,x):
+		b = self.funcion.free_symbols
+		var = b.pop()
+		valor = self.funcion.evalf(subs = {var:x})
+		return valor
 
-		contador = 1
-		print("")
+	def falsaPosicion(self,a, b, tolerancia):
+
+		error = 10
+
+		if (self.f(a) * self.f(b) < 0):
+
+			contador = 1
+			print("")
 		
-		while error > tolerancia and contador < 200:
+			while error > tolerancia and contador < 200:
 
-			fa = f(a)
-			fb = f(b)
-			m = ((a * fb) - (b * fa)) / (fb - fa)
-			fm = f(m)
+				fa = self.f(a)
+				fb = self.f(b)
+				m = ((a * fb) - (b * fa)) / (fb - fa)
+				fm = self.f(m)
 
-			
-
-			if fm == 0:
+				if fm == 0:
+					raiz = m
+					break
+				elif fa * fm < 0:
+					b = m
+				else:
+					a = m
 				raiz = m
-				break
-			elif fa * fm < 0:
-				b = m
-			else:
-				a = m
-			raiz = m
-			error = abs(fm)
-			contador = contador + 1
+				error = abs(fm)
+				contador = contador + 1
 
-		print(tabla)
-		print("\nLa raíz es: ", raiz)
-		print("El error relativo es: ", error)
-	else:
-		print("\nLos intervalos no contienen la raíz")
-
+			print("\nLa raíz es: ", raiz)
+			print("El error relativo es: ", error)
+			return [raiz, error]
+		else:
+			print("\nLos intervalos no contienen la raíz")
+			return ['Los intervalos no contienen la raíz', 'Nan']
+"""
 print("Método de falsa posición\n")
 x, y = sp.symbols('x y')
 str_ecuacion = input("Ingrese la ecuación:\n")
@@ -58,3 +64,5 @@ tolerancia = float(input("Digite el error de tolerancia: "))
 falsaPosicion(a, b, tolerancia)
 
 sp.plot(funcion, (x, a-0.5, b+0.5), title = 'Intervalo seleccionado: ' + str(a) + " , " + str(b))
+"""
+
