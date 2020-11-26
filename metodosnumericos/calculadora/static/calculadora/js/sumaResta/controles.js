@@ -80,6 +80,24 @@ $( "#btnMaTrans" ).on( "click", function() {
     }
 });
 //--------------------------------------------------------------------------------------------------------
+$( "#btnEscalar" ).on( "click", function() {
+    var rows = $('#rowsTres').val();
+    var cols = $('#colsTres').val();
+
+    if(rows == "" || cols == "" ){
+        alert("NO se han creado las matrices ");
+    }else{
+        $('#nameOperaUno').empty();
+        $('#nameOperaUno').append("Producto Escalar");
+        var datos = JSON.stringify({
+            mUno: getMatrix('matrizTres'),
+            producto:$("#producto_k").val()
+        }); 
+        calcMa('btnEscalar',datos,'matrixResultDos');
+        $('#modalProdEsca').modal('hide');
+    }
+});
+//--------------------------------------------------------------------------------------------------------
 $( "#btnMaGauss" ).on( "click", function() {
     var rows = $('#rowsTres').val();
     var cols = $('#colsTres').val();
@@ -237,11 +255,34 @@ function createMatrix(rows, cols, id_mariz) {
         content += "</tr>";
     }
 
-
     $('#'+id_mariz).append(content);
 }
 
 // ------------- AJUSTE CURVAS ------------
+
+
+$('#btnCalcularAjus').on("click", function(){
+
+
+
+    var datos = JSON.stringify({
+        mUno: getMatrix('coeAjus')
+    });
+
+    calcEcua('btnCalcularAjus', datos, "reAjus","","");
+});
+
+$("#btnGraficarAjus").on("click", function(){
+
+    var dats = getMatrix('coeAjus');
+    var px = dats[0].toString();
+    var py = dats[1].toString();
+    var funcion = $("#reAjus").val();
+
+    $("#imgUnoPoli").attr("src","/graficap/"+funcion+"/"+px+"/"+py);
+    
+});
+
 $( "#btnDatosAjus" ).on( "click", function() {
     var longiAjus = $("#longiAjus").val(); 
     $("#coeAjus").empty();
@@ -353,9 +394,7 @@ $( "#btnCalcularSin38" ).on( "click", function() {
         b:_b,
         n:_n
     });
-    alert("datoss38 : " + datos);
     var r = calcEcua("btnCalcularSin38", datos,"reSin38", "errSin38", "" );
-
 });
 
 $("#btnIntervalosSin38").on("click", function(){
@@ -391,7 +430,7 @@ $("#btnGraficarSin38").on("click", function(){
 
 
 $("#btnCalcMonte").on("click", function(){
-    alert("btn monte carlo");
+
     var funcion = $("#ecuacionMonte").val();
     var _a = $("#aMonte").val();
     var _b = $("#bMonte").val();
@@ -442,7 +481,7 @@ $("#btnGenGrafMonte").on("click", function(){
 //-------------------------------------------------------------------------------------------------------
 //-------metodos trapecios
 $("#btnCalcularTrap").on("click", function(){
-    alert("btn trapecios");
+
     var funcion = $("#ecuaTrap").val();
     var _a = $("#inaTrap").val();
     var _b = $("#inbTrap").val();
@@ -515,7 +554,7 @@ $("#btnGraficarRect").on("click", function(){
     }
 });
 $("#btnCalcularRect").on("click", function(){
-    alert("btn Rectangulos");
+
     var funcion = $("#ecuaRect").val();
     var _a = $("#inaRect").val();
     var _b = $("#inbRect").val();

@@ -69,7 +69,7 @@ def curveFit(n, x, y):
 
 def crearEcuacion(cohe):
 	n = cohe.shape[0]-1
-	k = 0;
+	k = 0
 	funcStr = ''
 	while(k != cohe.shape[0]):
 		num = np.ndarray.item(cohe[k])
@@ -77,14 +77,15 @@ def crearEcuacion(cohe):
 		k += 1
 		n -= 1
 
-	print ("Ecuación:\n", funcStr)
+	return funcStr
 
-# Tus datos
-x = np.array([1.13,1.15,1.25,1.07,1.19,1.18])
-y = np.array([3.75,4.02,4.15,4.3,3.95,4.49])
 
-x1 = np.array([x])
-grados = getGrados(x)
-k = curveFit(grados, x1, y)
-crearEcuacion(k)
-graficar(x, y, grados)
+def ajuste(listOne, listTow):
+	x = np.array(listOne)
+	y = np.array(listTow)
+	x1 = np.array([x])
+	grados = getGrados(x)
+	#graficar(x, y, grados)
+	k = curveFit(grados, x1, y)
+	return crearEcuacion(k)
+	
