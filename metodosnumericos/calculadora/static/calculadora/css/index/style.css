@@ -2,9 +2,10 @@ hr{
     background-color: aqua;
 }
 
-div.coeAjus {
+div.scrolldiv {
     background-color: #333;
     overflow: auto;
     white-space: nowrap;
+    width: 100%;
 }
   
