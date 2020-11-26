@@ -241,6 +241,17 @@ function createMatrix(rows, cols, id_mariz) {
     $('#'+id_mariz).append(content);
 }
 
+// ------------- AJUSTE CURVAS ------------
+$( "#btnDatosAjus" ).on( "click", function() {
+    var longiAjus = $("#longiAjus").val(); 
+    $("#coeAjus").empty();
+    if(longiAjus == ""){
+        alert("NO se han creado los campos ");
+    }else{
+        createMatrix(2, longiAjus, "coeAjus");
+    }    
+});
+
 function getRowsCols(){
     var dat = [[parseInt($('#rowsUno').val(), 10),parseInt($('#colsUno').val(),10)],
                 [parseInt($('#rowsDos').val(),10),parseInt($('#colsDos').val(),10)]];
