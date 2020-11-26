@@ -10,18 +10,18 @@
   </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">MetodosNumericos</a>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: forestgreen;">
+    <a class="navbar-brand" href="#" style="color: black;"> <b> MetodosNumericos  </b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar navbar-light" style="background-color: rgb(3, 180, 53) ;" id="navbarSupportedContent" >
       <ul class="navbar-nav mr-auto">
         
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Primer Corte
+            <b> Primer Corte </b>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'converBases' %}">Calculadora Conversiones</a>
@@ -36,7 +36,7 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Segundo Corte
+            <b>Segundo Corte </b>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'montecarlo' %}">Monte Carlo</a>
@@ -48,7 +48,7 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Tercer Corte
+            <b> Tercer Corte </b>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'SuMaMu' %}">Suma, Resta y Mult</a>
@@ -57,8 +57,12 @@
         
       </ul>
       
-    </div>
+    </div>    
   </nav>
+  <!-- L O L -->
+  <div style="float: left; width: 100%; height:100%; border-style: solid; color: blueviolet; ">
+
+  </div>
 
   {% block content %}
 
