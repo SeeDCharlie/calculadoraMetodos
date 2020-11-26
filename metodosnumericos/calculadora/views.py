@@ -162,6 +162,8 @@ def calcSimp38(request):
         print("r simpson 1/3 : ", resultado , "  error : ", error)
         return JsonResponse({'uno': str(resultado), "dos": str(error),"tres":'', 'success': True})
     return JsonResponse({'success':False})
+
+    
 @csrf_exempt
 def calcMonte(request):
     if request.is_ajax() and request.method == 'POST':
