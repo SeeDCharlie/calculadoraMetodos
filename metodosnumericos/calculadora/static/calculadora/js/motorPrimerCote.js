@@ -269,6 +269,21 @@ $("#btnCalcularSeca").on("click", function () {
         b: _b,
         error:_error
     });
-    alert("los datosde la secante son : " + datos);
     calcEcua("btnCalcularSeca", datos, "reSeca", "errSeca", "");
+});
+
+
+//conversos IEEE
+
+
+$("#btnCalcularIE").oN("click", function(){
+
+    var decimal = $("#ieDecimal").val();
+    var binario = $("#ieBinario").val();
+    var _32 = $("#ieSigno32").val() + $("#ieExp32").val() +$("#ieMan32").val();
+    var _64 = $("#ieSigno64").val() + $("#ieExp64").val() +$("#ieMan64").val();
+
+    if( decimal != ""){
+        
+    }
 });

@@ -263,7 +263,7 @@ function createMatrix(rows, cols, id_mariz) {
 
 $('#btnCalcularAjus').on("click", function(){
 
-    alert("btn ajuste de curvas");
+
 
     var datos = JSON.stringify({
         mUno: getMatrix('coeAjus')
@@ -394,9 +394,7 @@ $( "#btnCalcularSin38" ).on( "click", function() {
         b:_b,
         n:_n
     });
-    alert("datoss38 : " + datos);
     var r = calcEcua("btnCalcularSin38", datos,"reSin38", "errSin38", "" );
-
 });
 
 $("#btnIntervalosSin38").on("click", function(){
@@ -432,7 +430,7 @@ $("#btnGraficarSin38").on("click", function(){
 
 
 $("#btnCalcMonte").on("click", function(){
-    alert("btn monte carlo");
+
     var funcion = $("#ecuacionMonte").val();
     var _a = $("#aMonte").val();
     var _b = $("#bMonte").val();
@@ -483,7 +481,7 @@ $("#btnGenGrafMonte").on("click", function(){
 //-------------------------------------------------------------------------------------------------------
 //-------metodos trapecios
 $("#btnCalcularTrap").on("click", function(){
-    alert("btn trapecios");
+
     var funcion = $("#ecuaTrap").val();
     var _a = $("#inaTrap").val();
     var _b = $("#inbTrap").val();
@@ -556,7 +554,7 @@ $("#btnGraficarRect").on("click", function(){
     }
 });
 $("#btnCalcularRect").on("click", function(){
-    alert("btn Rectangulos");
+
     var funcion = $("#ecuaRect").val();
     var _a = $("#inaRect").val();
     var _b = $("#inbRect").val();
