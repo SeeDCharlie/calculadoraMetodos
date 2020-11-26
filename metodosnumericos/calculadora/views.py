@@ -19,6 +19,9 @@ from calculadora.motores import Falsa_posicion
 from calculadora.motores import Newton_Rhapson
 from calculadora.motores import Polinomio
 from calculadora.motores import Secante
+from calculadora.motores import Producto
+from calculadora.motores import Producto_Escalar
+from calculadora.motores import Ajuste_de_curvas
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -106,7 +109,7 @@ def calcMultMatriz(request):
     if request.is_ajax() and request.method == 'POST':
         mUno = json.loads(request.POST.get('dats'))['mUno']
         mDos = json.loads(request.POST.get('dats'))['mDos']
-        matrizResultado = motorMAtrix.multiMatrix(mUno, mDos).tolist()
+        matrizResultado = Producto.productoDeMatrices(mUno, mDos)
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
 
@@ -129,6 +132,25 @@ def calcMaTrans(request):
     return JsonResponse({'success': False})
 
 @csrf_exempt
+# pruducto escalar de una matriz
+def calcEscalar(request):
+    if request.is_ajax() and request.method == 'POST':
+        mUno = json.loads(request.POST.get('dats'))['mUno']
+        producto = json.loads(request.POST.get('dats'))['producto']
+        matrizResultado = Producto_Escalar.productoEscalar(mUno, producto)
+        return JsonResponse({'matrResult': matrizResultado, 'success': True})
+    return JsonResponse({'success': False})
+
+@csrf_exempt
+# pruducto escalar de una matriz
+def calcAjusteC(request):
+    if request.is_ajax() and request.method == 'POST':
+        mUno = json.loads(request.POST.get('dats'))['mUno']
+        resultado = Ajuste_de_curvas.ajuste(mUno[0], mUno[1])
+        return JsonResponse({'uno': str(resultado), "dos": '',"tres":'', 'success': True})
+    return JsonResponse({'success': False})
+
+@csrf_exempt
 # metodo de gauss jordan a una matriz
 def calcMaGauss(request):
     if request.is_ajax() and request.method == 'POST':
@@ -142,7 +164,7 @@ def calcMaGauss(request):
                             for i, dat in enumerate(matrizResultado)]
         return JsonResponse({'matrResult': [matrizResultado], 'success': True})
     return JsonResponse({'success': False})
-    
+
 @csrf_exempt
 def calcSimp13(request):
     if request.is_ajax() and request.method == 'POST':
@@ -284,6 +306,39 @@ def grafica(request,funcion, a , b ):
     canvas = FigureCanvasAgg(fig)
     ax = fig.add_subplot(111)
     ax.plot(xDats, yDats)
+
+    ax.set(xlabel='eje x', ylabel='eje y',
+           title='Grafica de la Funcion')
+    ax.grid()
+
+    response = HttpResponse(content_type = 'image/jpg')
+    
+    canvas.print_jpg(response)
+    return response
+
+def graficaP(request,funcion, px , py ):
+
+    def getnums(lis):
+        return [float(n) for n in lis]
+
+    px = px.split(",")
+    py = py.split(",")
+
+    a = min(getnums(px))-3
+    b = max(getnums(px))+3
+    
+    U, D = sp.symbols('U D')
+    div = lambda U,D: U/D
+    func = sp.sympify(funcion, locals = {'div': div})
+      
+    xDats = [i for i in np.arange(float(a),float(b)+1.0, 0.3)]
+    yDats = [ float('{:.15f}'.format(float(func.subs(x,i)))) for i in xDats]
+
+    fig = Figure()
+    canvas = FigureCanvasAgg(fig)
+    ax = fig.add_subplot(111)
+    ax.plot(xDats, yDats)
+    ax.plot(getnums(px), getnums(py), 'k*')
 
     ax.set(xlabel='eje x', ylabel='eje y',
            title='Grafica de la Funcion')

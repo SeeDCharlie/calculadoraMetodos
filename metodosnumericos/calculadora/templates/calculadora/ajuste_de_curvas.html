@@ -2,31 +2,43 @@
 
 {% block content %}
 
-<label class="control-label col-sm-8" style="font-size:200%;"> Ajuste de Curvas</label> 
+    <br>
+    <p class="display-3" style="text-align: center;">Ajuste de Curvas</p> 
+    <hr>
+    <p>
+    * Ingrese la longitud de los datos para crear los campos correspondientes <br>
+    * Ingrese los datos correspondientes <br>
+    * Calcule la curva <br>
+    </p>
+    <hr>
 
 <div class="row">
-    <div class="col-sm-7">
+    <div class="col-12">
         <div class="d-flex flex-column justify-content-left">
             <div class="p-4">
 
 
                 <div class="form-group">
                 
-                    <label class="control-label col-sm-8" for="longiAjus">Longitud de datos:</label>
-                    <div class="col-sm-3">
-                        <input type="number" id="longiAjus" class="form-control" placeholder="Mayor a 0"><br>
+                    <label class="control-label col-8" for="longiAjus"><strong>Longitud de datos:</strong></label>
+                    <div class="col-12">
+                        <div class="row">
+                            <input type="number" id="longiAjus" class="form-control col" placeholder="Mayor a 0" style="margin: 10px;"><br>
 
-                        <button type="button" class="btn btn-warning" id="btnDatosAjus">No. Datos</button>
+                            <button type="button" class="btn btn-warning col" id="btnDatosAjus" style="margin: 10px;">Crear Campos</button>
+                        </div>
                         <br>
-                        <br>
-                        <label class="control-label col-sm-22" for="Xi" style="font-size:150%;"><b> Xi [ ] [ ] [ ]. . .</b></label>
-                        <label class="control-label col-sm-22" for="Yi" style="font-size:150%;"><b>Yi [ ] [ ] [ ]. . .</b></label>
-                        <br>
-                        <div id="container" style="margin: 10px;">
+                        <div class="row">
+                            <label class="control-label col-12" for="Xi" style="font-size:150%;"><b> Xi [ ] [ ] [ ]. . .</b></label>
+                            <label class="control-label col-12" for="Yi" style="font-size:150%;"><b>Yi [ ] [ ] [ ]. . .</b></label>
+                        </div>
+                        <div id="container" style="margin: 10px; width: 100%;">
                             <br>
-                            <table id="coeAjus">
+                            <div class="coeAjus" style="width: 100%;">
+                                <table id="coeAjus">
                                     
-                            </table>                            
+                                </table>
+                            </div>                         
                         </div>
                     </div>
                     <br>
@@ -34,9 +46,8 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             {% csrf_token %}
-                            <button type="button" class="btn btn-primary" id="btnCalcularAjus" url="{% url 'calcPolinomio' %}">Calcular Ajustes</button>
-                            <button style="position: absolute; right: 3%;" type="button" class="btn btn-success"
-                                id="btnGraficarAjus">Generar grafica</button>
+                            <button type="button" class="btn btn-primary" id="btnCalcularAjus" url="{% url 'calcAjusteC' %}">Calcular Ajustes</button>
+                            <button style="position: absolute; right: 3%;" type="button" class="btn btn-success" id="btnGraficarAjus">Generar grafica</button>
 
 
                         </div>

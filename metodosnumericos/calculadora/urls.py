@@ -8,8 +8,10 @@ from .views import *
 urlpatterns = [
     path('', index),
     path('home/', index,name="home"),
+
     path('grafica/<str:funcion>/<str:a>/<str:b>', grafica, name="grafica"),
-    
+    path('graficap/<str:funcion>/<str:px>/<str:py>', graficaP, name="graficaP"),
+
     path('ajuste_de_curvas/', ajuste_de_curvas,name="ajuste_de_curvas"),
 
     path('secante/', secante,name="secante"),
@@ -56,6 +58,10 @@ urlpatterns = [
 
     #transuesta de una matriz
     path('calcMaTans/', calcMaTrans, name = 'calcMaTrans'),
+
+    path('calcEscalar', calcEscalar, name = 'calcEscalar'),
+
+    path('calcAjusteC', calcAjusteC, name = 'calcAjusteC'),
 
     #gauss Jordan en una matriz
     path('calcMaGauss/', calcMaGauss, name = 'calcMaGauss'),

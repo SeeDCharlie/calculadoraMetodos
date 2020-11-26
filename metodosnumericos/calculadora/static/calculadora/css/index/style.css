@@ -1,0 +1,10 @@
+hr{
+    background-color: aqua;
+}
+
+div.coeAjus {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+}
+  
