@@ -237,7 +237,6 @@ function createMatrix(rows, cols, id_mariz) {
         content += "</tr>";
     }
 
-
     $('#'+id_mariz).append(content);
 }
 

@@ -18,6 +18,7 @@ from calculadora.motores import Biseccion
 from calculadora.motores import Falsa_posicion
 from calculadora.motores import Newton_Rhapson
 from calculadora.motores import Polinomio
+from calculadora.motores import Secante
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -77,6 +78,7 @@ def SuMaMu(request):
 
 def inTraGau(request):
     return render(request, 'calculadora/Inversa_Trans.html')
+
 @csrf_exempt
 def calcSumaMatriz(request):
     if request.is_ajax() and request.method == 'POST':
@@ -85,6 +87,7 @@ def calcSumaMatriz(request):
         matrizResultado = SumaResta.suma(mUno, mDos).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
+
 @csrf_exempt
 def calcRestaMatriz(request):
     if request.is_ajax() and request.method == 'POST':
@@ -93,6 +96,7 @@ def calcRestaMatriz(request):
         matrizResultado = SumaResta.resta(mUno, mDos).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
+
 @csrf_exempt
 # multiplicacion de matrices
 def calcMultMatriz(request):
@@ -102,6 +106,7 @@ def calcMultMatriz(request):
         matrizResultado = motorMAtrix.multiMatrix(mUno, mDos).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
+
 @csrf_exempt
 # inversa de una matriz
 def calcMaInver(request):
@@ -110,6 +115,7 @@ def calcMaInver(request):
         matrizResultado = motorMAtrix.matrizInver(mUno).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
+
 @csrf_exempt
 # transpuesta de una matriz
 def calcMaTrans(request):
@@ -118,6 +124,7 @@ def calcMaTrans(request):
         matrizResultado = motorMAtrix.matrixTran(mUno).tolist()
         return JsonResponse({'matrResult': matrizResultado, 'success': True})
     return JsonResponse({'success': False})
+
 @csrf_exempt
 # metodo de gauss jordan a una matriz
 def calcMaGauss(request):
@@ -132,6 +139,7 @@ def calcMaGauss(request):
                             for i, dat in enumerate(matrizResultado)]
         return JsonResponse({'matrResult': [matrizResultado], 'success': True})
     return JsonResponse({'success': False})
+    
 @csrf_exempt
 def calcSimp13(request):
     if request.is_ajax() and request.method == 'POST':
@@ -247,9 +255,21 @@ def calcPolinomio(request):
         return JsonResponse({'uno': str(resultado), "dos": '',"tres":'', 'success': True})
     return JsonResponse({'success':False})
 
+@csrf_exempt
+def calcSecante(request):
+    if request.is_ajax() and request.method == 'POST':
+        funcion = sp.sympify(json.loads(request.POST.get('dats'))['funcion'])
+        mot = Secante.motor_secante(funcion)
+        a = float(sp.sympify(json.loads(request.POST.get('dats'))['a']))
+        b = float(sp.sympify(json.loads(request.POST.get('dats'))['b']))
+        error = float(json.loads(request.POST.get('dats'))['error'])
+        resultado = mot.secante(a, b, error)
+        print("r polinomios : ", resultado )
+        return JsonResponse({'uno': str(resultado[0]), "dos": str(resultado[1]),"tres":'', 'success': True})
+    return JsonResponse({'success':False})
+
+
 def grafica(request,funcion, a , b ):
-
-
     U, D = sp.symbols('U D')
     div = lambda U,D: U/D
     func = sp.sympify(funcion, locals = {'div': div})

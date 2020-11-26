@@ -76,4 +76,6 @@ urlpatterns = [
     path('calcNewton/', calcNewton, name = 'calcNewton'),
 
     path('calcPolinomio/', calcPolinomio, name = 'calcPolinomio'),
+
+    path('calcSecante', calcSecante, name = 'calcSecante'),
 ]

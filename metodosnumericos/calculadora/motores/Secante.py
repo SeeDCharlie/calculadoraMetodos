@@ -3,35 +3,41 @@ import sympy as sp
 #import numpy as np
 #import matplotlib.pyplot as plt
 
-def f(x):
-	b = funcion.free_symbols
-	var = b.pop()
-	valor = funcion.evalf(subs = {var:x})
-	return valor
 
-def secante(a, b, tolerancia):
+class motor_secante:
 
-	c = 0
-	iteraciones = 0
-	print("")
+	def __init__(self, funcion):
+		self.funcion = funcion
+
+	def f(self, x):
+		b = self.funcion.free_symbols
+		var = b.pop()
+		valor = self.funcion.evalf(subs = {var:x})
+		return valor
+
+	def secante(self,a, b, tolerancia):
+
+		c = 0
+		iteraciones = 0
+
+		while(abs(self.f(c)) < tolerancia and iteraciones < 501):
+			c = b - ((b-a) / (self.f(b)-self.f(a))) * self.f(b)
+			a = b
+			b = c
+			iteraciones = iteraciones + 1
+
+		if(iteraciones >= 500):
+			print("\nSe ha alcanzado el numero máximo de iteraciones")
+			print("Es posible que no hayan raices en el intervalo")
+			print("Intenta con otro intervalo")
+			return ['Se ha alcanzado el numero máximo de iteraciones(500)','Intenta con otro intervalo']
+		else:
+			print("\nLa raíz es: ", c)
+			print("El error relativo es: ", abs(self.f(c)))
+			return [c,abs(self.f(c)) ]
 
 
-	while(abs(f(c)) > tolerancia and iteraciones < 200):
-		c = b - ((b-a) / (f(b)-f(a))) * f(b)
-		a = b
-		b = c
-		
-		iteraciones = iteraciones + 1
-
-	if(iteraciones == 200):
-		print("\nSe ha alcanzado el numero máximo de iteraciones")
-		print("Es posible que no hayan raices en el intervalo")
-		print("Intenta con otro intervalo")
-	else:
-		print(tabla)
-		print("\nLa raíz es: ", c)
-		print("El error relativo es: ", abs(f(c)))
-
+"""
 print("Método de la secante\n")
 x, y = sp.symbols('x y')
 str_ecuacion = input("Ingrese la ecuación:\n")
@@ -46,3 +52,4 @@ tolerancia = float(input("Digite el error de tolerancia: "))
 secante(a, b, tolerancia)
 
 sp.plot(funcion, (x, a-0.5, b+0.5), title = 'Intervalo seleccionado: ' + str(a) + " , " + str(b))
+"""
