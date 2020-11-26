@@ -8,8 +8,9 @@ from .views import *
 urlpatterns = [
     path('', index),
     path('home/', index,name="home"),
-    
     path('grafica/<str:funcion>/<str:a>/<str:b>', grafica, name="grafica"),
+    
+    path('secante/', secante,name="secante"),
 
     path('polinomio/', polinomio,name="polinomio"),
 

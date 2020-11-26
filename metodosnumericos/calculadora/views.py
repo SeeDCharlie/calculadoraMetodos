@@ -33,10 +33,11 @@ import cmath
 from sympy import log, sqrt
 from sympy.abc import x, y
 # Create your views here.
-
-
 def index(request):
     return render(request, 'calculadora/index.html')
+
+def secante(request):
+    return render(request, 'calculadora/secante.html')
 
 def polinomio(request):
     return render(request, 'calculadora/polinomio.html')
