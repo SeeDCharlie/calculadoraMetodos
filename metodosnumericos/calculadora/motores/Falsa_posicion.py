@@ -12,6 +12,7 @@ class motorFalsaPoci :
 
 	def f(self,x):
 		b = self.funcion.free_symbols
+
 		var = b.pop()
 		valor = self.funcion.evalf(subs = {var:x})
 		return valor

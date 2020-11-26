@@ -276,7 +276,7 @@ $("#btnCalcularSeca").on("click", function () {
 //conversos IEEE
 
 
-$("#btnCalcularIE").oN("click", function(){
+$("#btnCalcularIE").on("click", function(){
 
     var decimal = $("#ieDecimal").val();
     var binario = $("#ieBinario").val();
@@ -284,6 +284,6 @@ $("#btnCalcularIE").oN("click", function(){
     var _64 = $("#ieSigno64").val() + $("#ieExp64").val() +$("#ieMan64").val();
 
     if( decimal != ""){
-        
+
     }
 });
