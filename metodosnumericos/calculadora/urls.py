@@ -10,6 +10,8 @@ urlpatterns = [
     path('home/', index,name="home"),
     path('grafica/<str:funcion>/<str:a>/<str:b>', grafica, name="grafica"),
     
+    path('ajuste_de_curvas/', ajuste_de_curvas,name="ajuste_de_curvas"),
+
     path('secante/', secante,name="secante"),
 
     path('polinomio/', polinomio,name="polinomio"),

@@ -36,6 +36,9 @@ from sympy.abc import x, y
 # Create your views here.
 def index(request):
     return render(request, 'calculadora/index.html')
+    
+def ajuste_de_curvas(request):
+    return render(request, 'calculadora/ajuste_de_curvas.html')
 
 def secante(request):
     return render(request, 'calculadora/secante.html')
